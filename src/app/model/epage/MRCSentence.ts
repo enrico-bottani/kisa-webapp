@@ -3,14 +3,15 @@ import {RCSentenceDTO} from "../../dto/epage/MRCSentenceDTO";
 import {AssignableDTO} from "../../dto/assignable/AssignableDTO";
 import JSONDeepCopy from "../../util/JSONDeepCopy";
 import {AnswerIndexer} from "../AnswerIndexer";
+import {Assignable} from "../assignable/Assignable";
 
 export class RCSentence_Builder {
-    assignables: AssignableDTO[] = [];
+    assignables: Assignable[] = [];
     answerMap: AnswerIndexer[] = [];
     position: number = 0;
     type: string = ExercisePage.Type.RCSentenceType;
     dirty?: boolean = false;
-    setAssignables(assignables: AssignableDTO[]): RCSentence_Builder {
+    setAssignables(assignables: Assignable[]): RCSentence_Builder {
         this.assignables = assignables;
         return this;
     }
@@ -35,10 +36,10 @@ export class RCSentence_Builder {
 }
 
 export class MRCSentence extends ExercisePage implements RCSentenceDTO {
-    assignables: AssignableDTO[] = [];
+    assignables: Assignable[] = [];
     answerMap: AnswerIndexer[] = [];
     type= ExercisePage.Type.RCSentenceType;
-    constructor(assignables: AssignableDTO[], position: number, type: string, dirty?: boolean) {
+    constructor(assignables: Assignable[], position: number, type: string, dirty?: boolean) {
         super(position, type, dirty);
         this.assignables = assignables;
         for (let i = 0; i < assignables.length; i++) {
