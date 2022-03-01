@@ -14,7 +14,7 @@ export default class ExercisePageMapper {
                 let rcSentence = td as RCSentenceDTO;
                 return RCSentenceMapper.map(rcSentence);
             }
-            else return new ExercisePage(td.position, td.type, td.dirty)
+            else return new ExercisePage(td.id,td.type,td.position,  td.dirty)
         });
         return todo;
     }

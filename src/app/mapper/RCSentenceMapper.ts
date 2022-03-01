@@ -6,6 +6,7 @@ import AssignableMapper from "./AssignableMapper";
 class RCSentenceMapper {
     static map(e: RCSentenceDTO): MRCSentence {
         return MRCSentence.builder()
+            .setId(e.id)
             .setPosition(e.position)
             .setAssignables(e.assignables.map(assign=>{return AssignableMapper.map(assign)}))
             .setDirty(e.dirty === true)
