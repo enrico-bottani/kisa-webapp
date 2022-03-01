@@ -10,4 +10,13 @@ export default class ExerciseClient {
                 return response.json() as Promise<ExerciseDTO[]>
             });
     }
+    static getExercise(exerciseId:number): Promise<ExerciseDTO> {
+        return fetch("http://localhost:8081/exercises/"+exerciseId+".json", {method: "GET"})
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json() as Promise<ExerciseDTO>
+            });
+    }
 }

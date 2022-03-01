@@ -1,5 +1,5 @@
 import ExercisePage from "./ExercisePage";
-import {RCSentenceDTO} from "../../dto/epage/MRCSentenceDTO";
+import {MRCSentenceDTO} from "../../dto/epage/MRCSentenceDTO";
 import {AssignableDTO} from "../../dto/assignable/AssignableDTO";
 import JSONDeepCopy from "../../util/JSONDeepCopy";
 import {AnswerIndexer} from "../AnswerIndexer";
@@ -41,7 +41,7 @@ export class RCSentence_Builder {
     }
 }
 
-export class MRCSentence extends ExercisePage implements RCSentenceDTO {
+export class MRCSentence extends ExercisePage implements MRCSentenceDTO {
     assignables: Assignable[] = [];
     answerMap: AnswerIndexer[] = [];
     type= ExercisePage.Type.RCSentenceType;

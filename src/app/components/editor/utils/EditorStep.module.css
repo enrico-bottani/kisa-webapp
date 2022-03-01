@@ -1,0 +1,44 @@
+:root {
+--step-number-width: 2rem;
+}
+
+.StickyPreview{
+    position: sticky;
+    top: 0;
+    background-color: #e9ecef;
+    z-index: 4;
+    box-shadow: 0px 2px 0px 0px rgba(222,226,230,0.8);
+}
+
+.BorderSeparator{
+    border-top: 2px solid #dee2e6!important;
+}
+
+.EditorStep{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 1rem;
+}
+.EditorStep:first-child{
+    margin-top: 0;
+}
+
+.EditorStepNumber{
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: var(--step-number-width);
+    height: 2rem;
+
+    background-color: #6c757d;
+    color: white;
+    text-align: center;
+    margin-right: 1rem;
+}
+
+.EditorStepChildWrapper{
+    display: flex;
+    margin-left: calc(var(--step-number-width)/2);
+}

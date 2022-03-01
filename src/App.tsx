@@ -1,21 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
-import ExerciseClient from "./app/client/ExerciseClient";
-import Exercise from "./app/model/exercise/Exercise";
-import ExerciseMapper from "./app/mapper/ExerciseMapper";
-import TodosPagination from "./app/components/pagination/TodosPagination";
-import ExercisesSelectorWidget from "./app/components/exercise/ExercisesSelectorWidget";
+import {BrowserRouter, Outlet} from "react-router-dom";
 
 function App() {
-    let [exercise, setExercise] = useState(Exercise.builder().build())
-    ExerciseClient.getExercises()
-        .then(exercise => {
-            console.log(exercise)
-            console.log(ExerciseMapper.map(exercise[0], 0))
-
-        })
-        .catch(e => console.error("Net. error"))
     return (
         <div className="App">
             <header className="App-header">
@@ -24,12 +12,7 @@ function App() {
                     rel="stylesheet"/>
             </header>
             <main>
-                <div className="container">
-                    <div className="row">
-                        <h1>Choose an exercise</h1>
-                        <ExercisesSelectorWidget/>
-                    </div>
-                </div>
+                <Outlet/>
             </main>
         </div>
     );

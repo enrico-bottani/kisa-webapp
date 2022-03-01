@@ -26,11 +26,11 @@ function TodoPage(props: Props) {
     var label = "" + (props.representingTodoNumber + 1);
 
     return <GenericTodoButton<number>
-        sign={sign}
-        onClick={props.onSetSelected}
-        label={label}
-        id={label}
-        btnClass={btnClass}
-        param={props.representingTodoNumber}></GenericTodoButton>
+    sign={sign}
+    onClick={props.onSetSelected}
+    label={label}
+    id={label}
+    btnClass={btnClass}
+    param={props.representingTodoNumber}/>
 }
 export default TodoPage;

@@ -1,6 +1,6 @@
 import {ExercisePageDTO} from "./ExercisePageDTO";
 import {AssignableDTO} from "../assignable/AssignableDTO";
 
-export interface RCSentenceDTO extends ExercisePageDTO {
+export interface MRCSentenceDTO extends ExercisePageDTO {
     assignables: AssignableDTO[];
 }

@@ -9,11 +9,23 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 
 import '@popperjs/core';
 import 'bootstrap/dist/js/bootstrap.min.js'
+import {BrowserRouter, Route, Routes, useParams} from "react-router-dom";
+import ExercisesSelectorWidget from "./app/components/exercise/ExercisesSelectorWidget";
+import ExerciseWidget from "./app/components/exercise/ExerciseWidget";
+
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<App/>}>
+                    <Route path="exercises" element={<ExercisesSelectorWidget/>}/>
+                    <Route path="exercises/:exercise" element={<ExerciseWidget />} />
+                </Route>
+            </Routes>
+        </BrowserRouter>
+    </React.StrictMode>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
