@@ -14,7 +14,7 @@ export default class AssignableMapper {
         if (e.type == AssignableDTO.Type.RCAnswerable) {
             var assign = e as MRCAnswerable;
             var ansItems = assign.answerableItems.map(answItem =>
-                new MRCAnswerableItem(answItem.id, answItem.choice, answItem.solution, assign))
+                new MRCAnswerableItem(answItem.id, answItem.choice, answItem.solution, assign.id))
             return new MRCAnswerable(assign.id, assign.type, assign.position, ansItems, sentenceDTO.id);
         }
         // caso stringa
