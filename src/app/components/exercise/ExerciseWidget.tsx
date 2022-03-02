@@ -8,6 +8,7 @@ import ExercisePaginationWidget from "../pagination/ExercisePaginationWidget";
 import RCSentenceEditor from "../editor/RCSentenceEditor";
 import RCSentenceMapper from "../../mapper/RCSentenceMapper";
 import {MRCSentence} from "../../model/epage/MRCSentence";
+import MRCAnswerable from "../../model/assignable/MRCAnswerable";
 
 export default function ExerciseWidget() {
     let params = useParams();
@@ -28,14 +29,38 @@ export default function ExerciseWidget() {
     }, [])
 
 
-
     function cloneAndSetExercisePage(ex: Exercise, page: any) {
         ex = ex.clone();
         ex.selected = page;
         console.log(ex);
         return ex;
     }
+
     console.log(exercise.pages.length)
+
+    function setToUpdate(fn: (e: Exercise) => Exercise) {
+        console.log("updating...")
+        setExercise(fn);
+    }
+
+    function onSentenceAnswerableItemChange(sId: number, aId: number, aItId: number, value: string) {
+        setExercise(ex => {
+            let exToUpdate = ex.clone();
+
+            let toUpdateMRCSentence:MRCSentence = exToUpdate.pages
+                .find(page => page.id === sId) as MRCSentence;
+            if(toUpdateMRCSentence===undefined)return ex;
+            let updateMRCAnswerable = (toUpdateMRCSentence.assignables
+                .find(assign => assign.id === aId) as MRCAnswerable)
+            if (updateMRCAnswerable===undefined)return ex;
+            let choice = updateMRCAnswerable.answerableItems
+                .find(aItem=>aItem.id === aItId);
+            if(choice===undefined)return ex;
+            choice.choice = value;
+            return exToUpdate;
+        })
+    }
+
     return (
         <div>
             <div className={"container"}>
@@ -57,15 +82,14 @@ export default function ExerciseWidget() {
                 createNewDraft={() => {
                 }}/>
 
-                {
+            {
                 // Render editor here
 
             }
 
-            <RCSentenceEditor stageRCSentenceEdits={() => {
-                }}
-                rcSentenceDTO={
-                    RCSentenceMapper.map(exercise.pages[exercise.selected] as MRCSentence)
-                }/>
+            <RCSentenceEditor onSentenceAnswerableItemChange={onSentenceAnswerableItemChange} setToUpdate={setToUpdate}
+                              stageRCSentenceEdits={() => {
+                              }}
+                              rcSentenceDTO={RCSentenceMapper.map(exercise.pages[exercise.selected] as MRCSentence)}/>
         </div>);
 }

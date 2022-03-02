@@ -2,8 +2,11 @@ import {MRCSentence} from "../../model/epage/MRCSentence";
 import {Assignable} from "../../model/assignable/Assignable";
 import {AssignableDTO} from "../../dto/assignable/AssignableDTO";
 import MRCAnswerable from "../../model/assignable/MRCAnswerable";
+import {ChangeEvent} from "react";
+import MRCAnswerableWidget from "./MRCAnswerableWidget";
+import Exercise from "../../model/exercise/Exercise";
 
-export default function RCSentenceComponentStratEditor(props: { rcSentenceDTO: MRCSentence }) {
+export default function RCSentenceComponentStratEditor(props: { rcSentenceDTO: MRCSentence, onSentenceAnswerableItemChange: (sentenceId:number,answerableId: number, answerItemId: number, value: string) => void }) {
 
     function getString(assignable: Assignable) {
         return (<div className="mb-3" key={assignable.id}>
@@ -13,18 +16,10 @@ export default function RCSentenceComponentStratEditor(props: { rcSentenceDTO: M
         </div>);
     }
 
-    function getRadios(mrcAnswerable: MRCAnswerable) {
-        return mrcAnswerable.answerableItems.map(answerableItem => {
-            return (<div className="input-group rounded-0 mb-1" key={answerableItem.id}>
-                <div className="input-group-text rounded-0">
-                    <input className="form-check-input mt-0" type="radio" name="radio-x"
-                           aria-label="Radio button for following text input"/>
-                </div>
-                <input type="text" defaultValue={answerableItem.choice} className="form-control rounded-0"
-                       aria-label="Text input with radio button"/>
-            </div>)
-        });
+    function onSentenceAnswerableItemChange(answerableId: number, answerItemId: number, value: string) {
+        props.onSentenceAnswerableItemChange(props.rcSentenceDTO.id,answerableId,answerItemId,value);
     }
+
 
     let toRender = props.rcSentenceDTO.assignables.map(assignable => {
         switch (assignable.type) {
@@ -34,7 +29,8 @@ export default function RCSentenceComponentStratEditor(props: { rcSentenceDTO: M
                 return (
                     <div className="mb-3" key={assignable.id}>
                         <label htmlFor="exampleInputEmail1" className="form-label">Radio choice component</label>
-                        {getRadios(assignable as MRCAnswerable)}
+                        <MRCAnswerableWidget mrcAnswerable={assignable as MRCAnswerable}
+                                             onSentenceAnswerableItemChange={onSentenceAnswerableItemChange}/>
                         <button>Add new choice</button>
                     </div>)
             case AssignableDTO.Type.Undefined:
