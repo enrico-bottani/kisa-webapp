@@ -5,46 +5,6 @@ import JSONDeepCopy from "../../util/JSONDeepCopy";
 import {AnswerIndexer} from "../AnswerIndexer";
 import {Assignable} from "../assignable/Assignable";
 
-export class RCSentence_Builder {
-    assignables: Assignable[] = [];
-    answerMap: AnswerIndexer[] = [];
-    position: number = 0;
-    type: string = ExercisePage.Type.RCSentenceType;
-    dirty?: boolean = false;
-    id:number = -1;
-    parentId:number = 0;
-    setId(id:number){
-        this.id = id;
-        return this;
-    }
-    setAssignables(assignables: Assignable[]): RCSentence_Builder {
-        this.assignables = assignables;
-        return this;
-    }
-    setPosition(position: number): RCSentence_Builder {
-        if (position === undefined) return this;
-        this.position = position;
-        return this;
-    }
-    setType(type: string): RCSentence_Builder {
-        if (type === undefined) return this;
-        this.type = type;
-        return this;
-    }
-    setDirty(dirty: boolean): RCSentence_Builder {
-        if (dirty === undefined) return this;
-        this.dirty = dirty;
-        return this;
-    }
-    setParentId(parentId: number): RCSentence_Builder {
-        if (parentId === undefined) return this;
-        this.parentId = parentId;
-        return this;
-    }
-    build(): MRCSentence {
-        return new MRCSentence(this.assignables, this.id,this.type,this.position, this.parentId, this.dirty);
-    }
-}
 
 export class MRCSentence extends ExercisePage implements MRCSentenceDTO {
     assignables: Assignable[] = [];
@@ -60,8 +20,8 @@ export class MRCSentence extends ExercisePage implements MRCSentenceDTO {
 
         }
     }
-    static builder() {
-        return new RCSentence_Builder();
+    static EMPTY(): MRCSentence{
+        return new MRCSentence([],-1,AssignableDTO.Type.Undefined,-1,-1,false);
     }
     clone(): MRCSentence {
         return new MRCSentence(JSONDeepCopy.deepCopy(this.assignables),this.id,this.type,this.position, this.parentId, this.dirty)

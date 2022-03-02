@@ -3,7 +3,7 @@ import Exercise from "../model/exercise/Exercise";
 import {ExercisePageDTO} from "../dto/epage/ExercisePageDTO";
 import ExercisePage from "../model/epage/ExercisePage";
 import {MRCSentenceDTO} from "../dto/epage/MRCSentenceDTO";
-import RCSentenceMapper from "./RCSentenceMapper";
+import MRCSentenceMapper from "./MRCSentenceMapper";
 
 export default class ExercisePageMapper {
     public static map(e: ExerciseDTO): ExercisePage[] {
@@ -14,7 +14,7 @@ export default class ExercisePageMapper {
                 let rcSentence = td as MRCSentenceDTO;
                 // Set the id, (fix api to return it in the future)
                 rcSentence.parentId = e.id;
-                return RCSentenceMapper.map(rcSentence);
+                return MRCSentenceMapper.map(rcSentence);
             } else return new ExercisePage(td.id, td.type, td.position, e.id, td.dirty)
         });
         return todo;

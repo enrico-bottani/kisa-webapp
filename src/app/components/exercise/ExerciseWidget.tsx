@@ -6,7 +6,7 @@ import ExerciseMapper from "../../mapper/ExerciseMapper";
 import NetState from "../../util/NetState";
 import ExercisePaginationWidget from "../pagination/ExercisePaginationWidget";
 import RCSentenceEditor from "../editor/RCSentenceEditor";
-import RCSentenceMapper from "../../mapper/RCSentenceMapper";
+import MRCSentenceMapper from "../../mapper/MRCSentenceMapper";
 import {MRCSentence} from "../../model/epage/MRCSentence";
 import MRCAnswerable from "../../model/assignable/MRCAnswerable";
 
@@ -90,6 +90,6 @@ export default function ExerciseWidget() {
             <RCSentenceEditor onSentenceAnswerableItemChange={onSentenceAnswerableItemChange} setToUpdate={setToUpdate}
                               stageRCSentenceEdits={() => {
                               }}
-                              rcSentenceDTO={RCSentenceMapper.map(exercise.pages[exercise.selected] as MRCSentence)}/>
+                              rcSentenceDTO={MRCSentenceMapper.map(exercise.pages[exercise.selected] as MRCSentence)}/>
         </div>);
 }
