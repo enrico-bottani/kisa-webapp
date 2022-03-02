@@ -6,7 +6,7 @@ import AssignableMapper from "./AssignableMapper";
 class RCSentenceMapper {
     static map(e: MRCSentenceDTO): MRCSentence {
         if (e == undefined) return MRCSentence.builder().build();
-        return MRCSentence.builder()
+        let mrcSentence =  MRCSentence.builder()
             .setId(e.id)
             .setPosition(e.position)
             .setAssignables(e.assignables.map(assign => {
@@ -15,6 +15,8 @@ class RCSentenceMapper {
             .setDirty(e.dirty === true)
             .setPosition(e.position)
             .build();
+        mrcSentence.assignables.forEach(assign=>{assign.sentence = mrcSentence});
+        return mrcSentence;
     }
 }
 

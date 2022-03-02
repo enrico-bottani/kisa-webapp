@@ -1,5 +1,6 @@
 import {ExercisePageDTO} from "../../dto/epage/ExercisePageDTO";
 import {AssignableDTO} from "../../dto/assignable/AssignableDTO";
+import Exercise from "../exercise/Exercise";
 
 
 export class ExercisePage implements ExercisePageDTO {
@@ -7,6 +8,7 @@ export class ExercisePage implements ExercisePageDTO {
     position: number = -1;
     type: string = AssignableDTO.Type.Undefined;
     dirty?: boolean = false;
+    exercise?: Exercise;
 
     constructor(id:number, type: string,position: number, dirty?: boolean) {
         this.id = id;
