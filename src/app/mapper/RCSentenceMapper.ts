@@ -13,9 +13,8 @@ class RCSentenceMapper {
                 return AssignableMapper.map(assign)
             }))
             .setDirty(e.dirty === true)
-            .setPosition(e.position)
+            .setParentId(e.parentId)
             .build();
-        mrcSentence.assignables.forEach(assign=>{assign.sentence = mrcSentence});
         return mrcSentence;
     }
 }

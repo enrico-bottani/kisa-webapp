@@ -6,15 +6,16 @@ import {MRCSentenceDTO} from "../dto/epage/MRCSentenceDTO";
 import RCSentenceMapper from "./RCSentenceMapper";
 
 export default class ExercisePageMapper {
-    public static map(e: ExercisePageDTO[]): ExercisePage[] {
+    public static map(e: ExerciseDTO): ExercisePage[] {
         // For each todo
-        let todo:ExercisePage[] = e.map(td => {
+        let todo: ExercisePage[] = e.pages.map(td => {
             // Get the type
             if (td.type === ExercisePage.Type.RCSentenceType) {
                 let rcSentence = td as MRCSentenceDTO;
+                // Set the id, (fix api to return it in the future)
+                rcSentence.parentId = e.id;
                 return RCSentenceMapper.map(rcSentence);
-            }
-            else return new ExercisePage(td.id,td.type,td.position,  td.dirty)
+            } else return new ExercisePage(td.id, td.type, td.position, e.id, td.dirty)
         });
         return todo;
     }

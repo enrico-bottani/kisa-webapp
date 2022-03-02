@@ -12,7 +12,7 @@ export class RCSentence_Builder {
     type: string = ExercisePage.Type.RCSentenceType;
     dirty?: boolean = false;
     id:number = -1;
-
+    parentId:number = 0;
     setId(id:number){
         this.id = id;
         return this;
@@ -36,8 +36,13 @@ export class RCSentence_Builder {
         this.dirty = dirty;
         return this;
     }
+    setParentId(parentId: number): RCSentence_Builder {
+        if (parentId === undefined) return this;
+        this.parentId = parentId;
+        return this;
+    }
     build(): MRCSentence {
-        return new MRCSentence(this.assignables, this.id,this.type,this.position,  this.dirty);
+        return new MRCSentence(this.assignables, this.id,this.type,this.position, this.parentId, this.dirty);
     }
 }
 
@@ -45,8 +50,8 @@ export class MRCSentence extends ExercisePage implements MRCSentenceDTO {
     assignables: Assignable[] = [];
     answerMap: AnswerIndexer[] = [];
     type= ExercisePage.Type.RCSentenceType;
-    constructor(assignables: Assignable[], id:number,type: string,position: number,  dirty?: boolean) {
-        super(id, type,position, dirty);
+    constructor(assignables: Assignable[], id:number,type: string,position: number,parentId:number,  dirty?: boolean) {
+        super(id, type,position, parentId,dirty);
         this.assignables = assignables;
         for (let i = 0; i < assignables.length; i++) {
             if (assignables[i].type == AssignableDTO.Type.RCAnswerable) {
@@ -59,6 +64,6 @@ export class MRCSentence extends ExercisePage implements MRCSentenceDTO {
         return new RCSentence_Builder();
     }
     clone(): MRCSentence {
-        return new MRCSentence(JSONDeepCopy.deepCopy(this.assignables),this.id,this.type,this.position,  this.dirty)
+        return new MRCSentence(JSONDeepCopy.deepCopy(this.assignables),this.id,this.type,this.position, this.parentId, this.dirty)
     }
 }
