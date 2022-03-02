@@ -9,9 +9,7 @@ class RCSentenceMapper {
         let mrcSentence =  MRCSentence.builder()
             .setId(e.id)
             .setPosition(e.position)
-            .setAssignables(e.assignables.map(assign => {
-                return AssignableMapper.map(assign)
-            }))
+            .setAssignables(AssignableMapper.map(e))
             .setDirty(e.dirty === true)
             .setParentId(e.parentId)
             .build();

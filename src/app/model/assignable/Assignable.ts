@@ -4,12 +4,13 @@ export class Assignable {
     type: string;
     position:number;
     id:number;
-    sentence?: MRCSentence;
+    _parentId: number;
 
-    constructor(id:number, type:string,position:number) {
+    constructor(id:number, type:string,position:number, _parentId:number) {
         this.type=type;
         this.position = position;
         this.id = id;
+        this._parentId = _parentId;
     }
 
 }
