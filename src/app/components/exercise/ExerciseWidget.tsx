@@ -20,7 +20,7 @@ export default function ExerciseWidget() {
 
     function downloadExercise(mrc:MRCAnswerableItem|null){
         if (mrc!==null){
-            let page = exercise.pages.find(p=>p.id==mrc._exercisePageId);
+            let page = exercise.pages.find(p=>p.id==mrc.id);
             console.log("Update using the page reference, we need a tree with double linked nodes")
         }
 
