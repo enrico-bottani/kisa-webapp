@@ -7,21 +7,22 @@ import {MRCSentence} from "../model/epage/MRCSentence";
 import AssignableMapper from "./AssignableMapper";
 
 export default class ExercisePageMapper {
-    public static map(e: ExerciseDTO): ExercisePage[] {
+    public static map(exerciseDTO: ExerciseDTO): ExercisePage[] {
         // For each todo
-        let todo: ExercisePage[] = e.pages.map(td => {
+        let todo: ExercisePage[] = exerciseDTO.pages.map(exercisePageDTO => {
             // Get the type
-            if (td.type === ExercisePage.Type.RCSentenceType) {
-                let mrcSDTO = td as MRCSentenceDTO;
-                // Set the id, (fix api to return it in the future)
-                mrcSDTO._exerciseId = e.id;
-                return new MRCSentence(AssignableMapper.map(mrcSDTO),
-                    mrcSDTO.id,
-                    mrcSDTO.type,
-                    mrcSDTO.position,
-                    mrcSDTO._exerciseId, 
-                    mrcSDTO.dirty == true);
-            } else return new ExercisePage(td.id, td.type, td.position, e.id, td.dirty)
+            if (exercisePageDTO.type === ExercisePage.Type.RCSentenceType) {
+                let mrcSentenceDTO = exercisePageDTO as MRCSentenceDTO;
+                let assignableList = mrcSentenceDTO.assignables.map(mrcSentenceDTO => AssignableMapper.map(mrcSentenceDTO));
+
+                let mrcSentence = new MRCSentence(assignableList,
+                    mrcSentenceDTO.id,
+                    mrcSentenceDTO.type,
+                    mrcSentenceDTO.position,
+                    mrcSentenceDTO._exerciseId,
+                    mrcSentenceDTO.dirty == true);
+                return mrcSentence;
+            } else return new ExercisePage(exercisePageDTO.id, exercisePageDTO.type, exercisePageDTO.position, exerciseDTO.id, exercisePageDTO.dirty)
         });
         return todo;
     }
