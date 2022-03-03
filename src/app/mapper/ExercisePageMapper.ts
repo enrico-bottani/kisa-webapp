@@ -13,14 +13,23 @@ export default class ExercisePageMapper {
             // Get the type
             if (exercisePageDTO.type === ExercisePage.Type.RCSentenceType) {
                 let mrcSentenceDTO = exercisePageDTO as MRCSentenceDTO;
-                let assignableList = mrcSentenceDTO.assignables.map(mrcSentenceDTO => AssignableMapper.map(mrcSentenceDTO));
 
-                let mrcSentence = new MRCSentence(assignableList,
+                let mrcSentence = new MRCSentence(
                     mrcSentenceDTO.id,
                     mrcSentenceDTO.type,
                     mrcSentenceDTO.position,
                     mrcSentenceDTO._exerciseId,
                     mrcSentenceDTO.dirty == true);
+
+                let assignableList = mrcSentenceDTO.assignables.map(mrcSentenceDTO => {
+                    let assignable = AssignableMapper.map(mrcSentenceDTO)
+                    assignable.setParentSentence(mrcSentence);
+                    return assignable;
+                });
+
+                mrcSentence.setAssignables(assignableList);
+
+
                 return mrcSentence;
             } else return new ExercisePage(exercisePageDTO.id, exercisePageDTO.type, exercisePageDTO.position, exerciseDTO.id, exercisePageDTO.dirty)
         });
