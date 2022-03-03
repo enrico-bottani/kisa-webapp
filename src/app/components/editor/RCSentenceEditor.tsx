@@ -31,9 +31,8 @@ function RCSentenceEditor(props: Props) {
                     <div className='row gx-0 border-bottom border-2 mb-3 pb-2 d-flex align-items-center'>
                         <div className="col-auto">
                             <button disabled={!(props.rcSentenceDTO.dirty === true)}
-                                    className={"btn btn-success rounded-0 " + styles.EditorSubStepNumber}>
-                                <i className="bi bi-save"/>
-                                <span className='ms-2'>Save</span>
+                                    className={"btn btn-secondary rounded-0 " + styles.EditorSubStepNumber}>
+                                <i className="bi bi-ui-radios"/>
                             </button>
                         </div>
                         <div className="col ms-3"><h2 className='mb-0'>Radio Choice Editor</h2></div>
