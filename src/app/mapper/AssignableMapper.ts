@@ -15,8 +15,7 @@ export default class AssignableMapper {
             if (e.type == AssignableDTO.Type.RCAnswerable) {
                 var assign = e as MRCAnswerableDTO;
                 let mrcAnswerable =  new MRCAnswerable(assign.id, assign.type, assign.position);
-                var ansItems = assign.answerableItems.map(answItem =>
-                    new MRCAnswerableItem(answItem.id, answItem.choice, answItem.solution).setParent(mrcAnswerable))
+                var ansItems = this.setAnswerableItemsWithParent(assign, mrcAnswerable);
                 mrcAnswerable.setAnswerableItems(ansItems);
                 return mrcAnswerable;
             }
@@ -27,5 +26,11 @@ export default class AssignableMapper {
             }
             return new Assignable(e.id, e.type, e.position);
         })
+    }
+
+    private static setAnswerableItemsWithParent(assign: MRCAnswerableDTO, _parent: MRCAnswerable) {
+        var ansItems = assign.answerableItems.map(answItem =>
+            new MRCAnswerableItem(answItem.id, answItem.choice, answItem.solution).setParent(_parent))
+        return ansItems;
     }
 }
