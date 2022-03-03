@@ -14,9 +14,8 @@ export default class ExercisePageMapper {
             if (td.type === ExercisePage.Type.RCSentenceType) {
                 let mrcSentenceDTO = td as MRCSentenceDTO;
                 // Set the id, (fix api to return it in the future)
-                mrcSentenceDTO.parentId = e.id;
-                let mrcSentence = new MRCSentence(AssignableMapper.map(mrcSentenceDTO), mrcSentenceDTO.id, mrcSentenceDTO.type, mrcSentenceDTO.position, mrcSentenceDTO.parentId, mrcSentenceDTO.dirty == true);
-                return mrcSentence;
+                mrcSentenceDTO._exerciseId = e.id;
+                return new MRCSentence(AssignableMapper.map(mrcSentenceDTO), mrcSentenceDTO.id, mrcSentenceDTO.type, mrcSentenceDTO.position, mrcSentenceDTO._exerciseId, mrcSentenceDTO.dirty == true);
             } else return new ExercisePage(td.id, td.type, td.position, e.id, td.dirty)
         });
         return todo;

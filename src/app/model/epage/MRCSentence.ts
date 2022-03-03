@@ -24,6 +24,6 @@ export class MRCSentence extends ExercisePage implements MRCSentenceDTO {
         return new MRCSentence([],-1,AssignableDTO.Type.Undefined,-1,-1,false);
     }
     clone(): MRCSentence {
-        return new MRCSentence(JSONDeepCopy.deepCopy(this.assignables),this.id,this.type,this.position, this.parentId, this.dirty)
+        return new MRCSentence(JSONDeepCopy.deepCopy(this.assignables),this.id,this.type,this.position, this._exerciseId, this.dirty)
     }
 }

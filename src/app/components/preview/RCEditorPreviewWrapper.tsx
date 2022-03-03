@@ -4,6 +4,8 @@ import {STRConstantDTO} from "../../dto/assignable/STRConstantDTO";
 import {MRCAnswerableDTO} from "../../dto/assignable/MRCAnswerableDTO";
 import RCChoices from "./assignables/RCOptions/RCChoices";
 import StringElement from "./assignables/StringElement/StringElement";
+import MRCAnswerable from "../../model/assignable/MRCAnswerable";
+import STRConstant from "../../model/assignable/STRConstant";
 
 interface Props {
     rcSentenceDTO: MRCSentenceDTO;
@@ -18,7 +20,7 @@ function RCEditorPreviewWrapper(props: Props) {
                 return (
                     <StringElement
                         key={id}
-                        stringConstant={(a as STRConstantDTO)}
+                        stringConstant={(a as STRConstant)}
                         editMode={1}/>
                 );
             case AssignableDTO.Type.RCAnswerable:
@@ -27,7 +29,7 @@ function RCEditorPreviewWrapper(props: Props) {
                     <RCChoices
                         key={id}
                         gapKey={gapKeyCounter - 1}
-                        rcAnswerableDTO={(a as MRCAnswerableDTO)}
+                        rcAnswerableDTO={(a as MRCAnswerable)}
                         editMode={1}/>
                 );
             default:

@@ -8,18 +8,18 @@ export class ExercisePage implements ExercisePageDTO {
     position: number = -1;
     type: string = AssignableDTO.Type.Undefined;
     dirty?: boolean = false;
-    parentId: number;
+    _exerciseId: number;
 
     constructor(id: number, type: string, position: number, parentId: number, dirty?: boolean) {
         this.id = id;
         this.position = position;
         this.type = type;
         this.dirty = dirty;
-        this.parentId = parentId;
+        this._exerciseId = parentId;
     }
 
     clone(): ExercisePage {
-        return new ExercisePage(this.id, this.type, this.position, this.parentId,this.dirty);
+        return new ExercisePage(this.id, this.type, this.position, this._exerciseId,this.dirty);
     }
 }
 

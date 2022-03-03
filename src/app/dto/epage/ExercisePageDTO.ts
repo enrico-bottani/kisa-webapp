@@ -3,5 +3,5 @@ export interface ExercisePageDTO {
     position: number;
     type: string;
     dirty?: boolean;
-    parentId:number;
+    _exerciseId:number;
 }
