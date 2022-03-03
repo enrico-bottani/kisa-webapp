@@ -4,7 +4,9 @@ import ExercisePageMapper from "./ExercisePageMapper";
 
 class ExerciseMapper {
     static map(e: ExerciseDTO, selected: number): Exercise {
-        let exercise = Exercise.builder().setId(e.id).setTodo(ExercisePageMapper.map(e)).setSelected(selected).setTitle(e.title).build();
+        let exercise = Exercise.builder().setId(e.id)
+            .setTodo(ExercisePageMapper.map(e))
+            .setSelected(selected).setTitle(e.title).build();
         return exercise;
     }
 }

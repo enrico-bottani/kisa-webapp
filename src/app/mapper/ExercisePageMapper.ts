@@ -12,10 +12,15 @@ export default class ExercisePageMapper {
         let todo: ExercisePage[] = e.pages.map(td => {
             // Get the type
             if (td.type === ExercisePage.Type.RCSentenceType) {
-                let mrcSentenceDTO = td as MRCSentenceDTO;
+                let mrcSDTO = td as MRCSentenceDTO;
                 // Set the id, (fix api to return it in the future)
-                mrcSentenceDTO._exerciseId = e.id;
-                return new MRCSentence(AssignableMapper.map(mrcSentenceDTO), mrcSentenceDTO.id, mrcSentenceDTO.type, mrcSentenceDTO.position, mrcSentenceDTO._exerciseId, mrcSentenceDTO.dirty == true);
+                mrcSDTO._exerciseId = e.id;
+                return new MRCSentence(AssignableMapper.map(mrcSDTO),
+                    mrcSDTO.id,
+                    mrcSDTO.type,
+                    mrcSDTO.position,
+                    mrcSDTO._exerciseId, 
+                    mrcSDTO.dirty == true);
             } else return new ExercisePage(td.id, td.type, td.position, e.id, td.dirty)
         });
         return todo;

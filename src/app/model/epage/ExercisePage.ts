@@ -10,12 +10,12 @@ export class ExercisePage implements ExercisePageDTO {
     dirty?: boolean = false;
     _exerciseId: number;
 
-    constructor(id: number, type: string, position: number, parentId: number, dirty?: boolean) {
+    constructor(id: number, type: string, position: number, _exerciseId: number, dirty?: boolean) {
         this.id = id;
         this.position = position;
         this.type = type;
         this.dirty = dirty;
-        this._exerciseId = parentId;
+        this._exerciseId = _exerciseId;
     }
 
     clone(): ExercisePage {
