@@ -11,10 +11,10 @@ export default class ExercisePageMapper {
         let todo: ExercisePage[] = e.pages.map(td => {
             // Get the type
             if (td.type === ExercisePage.Type.RCSentenceType) {
-                let rcSentence = td as MRCSentenceDTO;
+                let mrcSentenceDTO = td as MRCSentenceDTO;
                 // Set the id, (fix api to return it in the future)
-                rcSentence.parentId = e.id;
-                return MRCSentenceMapper.map(rcSentence);
+                mrcSentenceDTO.parentId = e.id;
+                return MRCSentenceMapper.map(mrcSentenceDTO);
             } else return new ExercisePage(td.id, td.type, td.position, e.id, td.dirty)
         });
         return todo;

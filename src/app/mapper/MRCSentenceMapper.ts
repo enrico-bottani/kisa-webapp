@@ -4,9 +4,9 @@ import {Assignable} from "../model/assignable/Assignable";
 import AssignableMapper from "./AssignableMapper";
 
 class MRCSentenceMapper {
-    static map(e: MRCSentenceDTO): MRCSentence {
-        if (e == undefined) return MRCSentence.EMPTY();
-            let mrcSentence = new MRCSentence(AssignableMapper.map(e),e.id,e.type,e.position,e.parentId,e.dirty==true);
+    static map(mrcSentenceDTO: MRCSentenceDTO): MRCSentence {
+        if (mrcSentenceDTO == undefined) return MRCSentence.EMPTY();
+            let mrcSentence = new MRCSentence(AssignableMapper.map(mrcSentenceDTO),mrcSentenceDTO.id,mrcSentenceDTO.type,mrcSentenceDTO.position,mrcSentenceDTO.parentId,mrcSentenceDTO.dirty==true);
         return mrcSentence;
     }
 }
