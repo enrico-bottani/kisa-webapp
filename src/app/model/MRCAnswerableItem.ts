@@ -5,7 +5,7 @@ import MRCAnswerableItemDTO from "../dto/item/MRCAnswerableItemDTO";
 
 export default class MRCAnswerableItem implements MRCAnswerableItemDTO{
     id: number; choice: string; solution: number;
-
+    _parent:MRCAnswerable|null=null;
     constructor(id: number, choice: string, solution: number) {
         this.id = id;
         this.choice = choice;
@@ -13,5 +13,9 @@ export default class MRCAnswerableItem implements MRCAnswerableItemDTO{
     }
     public clone():MRCAnswerableItem{
         return new MRCAnswerableItem(this.id, this.choice, this.solution);
+    }
+    public setParent(_parent:MRCAnswerable):MRCAnswerableItem{
+        this._parent = _parent;
+        return this;
     }
 }
