@@ -49,6 +49,11 @@ export class Exercise implements ExerciseDTO {
 
     }
 
+    public setPages(pages: ExercisePage[]):Exercise{
+        this.pages = pages;
+        return this;
+    }
+
     public static builder(): ExerciseDTOImpl_Builder {
         return new ExerciseDTOImpl_Builder();
     }

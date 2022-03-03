@@ -50,7 +50,7 @@ export default function ExerciseWidget() {
 
     let exercisePageToRender = exercise.pages[exercise.selected];
     if (exercisePageToRender===undefined){
-        exercisePageToRender = new MRCSentence(-1,ExercisePage.Type.RCSentenceType,-1,-1,false)
+        exercisePageToRender = new MRCSentence(-1,ExercisePage.Type.RCSentenceType,-1,false)
             .setAssignables([]);
     }
     return (

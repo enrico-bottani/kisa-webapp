@@ -10,8 +10,8 @@ export class MRCSentence extends ExercisePage implements MRCSentenceDTO {
     assignables: Assignable[] = [];
     answerMap: AnswerIndexer[] = [];
     type= ExercisePage.Type.RCSentenceType;
-    constructor(id:number,type: string,position: number,parentId:number,  dirty?: boolean) {
-        super(id, type,position, parentId,dirty);
+    constructor(id:number,type: string,position: number,  dirty?: boolean) {
+        super(id, type,position,dirty);
 
     }
     setAssignables(assignables: Assignable[]):MRCSentence{
@@ -26,9 +26,9 @@ export class MRCSentence extends ExercisePage implements MRCSentenceDTO {
     }
 
     static EMPTY(): MRCSentence{
-        return new MRCSentence(-1,AssignableDTO.Type.Undefined,-1,-1,false).setAssignables([]);
+        return new MRCSentence(-1,AssignableDTO.Type.Undefined,-1,false).setAssignables([]);
     }
     clone(): MRCSentence {
-        return new MRCSentence(this.id,this.type,this.position, this._exerciseId, this.dirty).setAssignables(JSONDeepCopy.deepCopy(this.assignables))
+        return new MRCSentence(this.id,this.type,this.position, this.dirty).setAssignables(JSONDeepCopy.deepCopy(this.assignables))
     }
 }
