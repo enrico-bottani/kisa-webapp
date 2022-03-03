@@ -38,28 +38,6 @@ export default function ExerciseWidget() {
 
     console.log(exercise.pages.length)
 
-    function setToUpdate(fn: (e: Exercise) => Exercise) {
-        console.log("updating...")
-        setExercise(fn);
-    }
-
-    function onSentenceAnswerableItemChange(sId: number, aId: number, aItId: number, value: string) {
-        setExercise(ex => {
-            let exToUpdate = ex.clone();
-
-            let toUpdateMRCSentence:MRCSentence = exToUpdate.pages
-                .find(page => page.id === sId) as MRCSentence;
-            if(toUpdateMRCSentence===undefined)return ex;
-            let updateMRCAnswerable = (toUpdateMRCSentence.assignables
-                .find(assign => assign.id === aId) as MRCAnswerable)
-            if (updateMRCAnswerable===undefined)return ex;
-            let choice = updateMRCAnswerable.answerableItems
-                .find(aItem=>aItem.id === aItId);
-            if(choice===undefined)return ex;
-            choice.choice = value;
-            return exToUpdate;
-        })
-    }
     let exercisePageToRender = exercise.pages[exercise.selected];
     if (exercisePageToRender===undefined){
         exercisePageToRender = new MRCSentence([],-1,ExercisePage.Type.RCSentenceType,-1,-1,false)
@@ -90,9 +68,6 @@ export default function ExerciseWidget() {
 
             }
 
-            <RCSentenceEditor onSentenceAnswerableItemChange={onSentenceAnswerableItemChange} setToUpdate={setToUpdate}
-                              stageRCSentenceEdits={() => {
-                              }}
-                              rcSentenceDTO={exercisePageToRender as MRCSentence}/>
+            <RCSentenceEditor rcSentenceDTO={exercisePageToRender as MRCSentence}/>
         </div>);
 }

@@ -6,7 +6,7 @@ import {ChangeEvent} from "react";
 import MRCEditorAnswerableWidget from "./MRCEditorAnswerableWidget";
 import Exercise from "../../model/exercise/Exercise";
 
-export default function RCSentenceComponentStratEditor(props: { rcSentenceDTO: MRCSentence, onSentenceAnswerableItemChange: (sentenceId:number,answerableId: number, answerItemId: number, value: string) => void }) {
+export default function RCSentenceComponentStratEditor(props: { rcSentenceDTO: MRCSentence}) {
 
     function getString(assignable: Assignable) {
         return (<div className="mb-3" key={assignable.id}>
@@ -14,10 +14,6 @@ export default function RCSentenceComponentStratEditor(props: { rcSentenceDTO: M
             <input type="text" className="form-control rounded-0" id="exampleInputEmail1"
                    aria-describedby="emailHelp"/>
         </div>);
-    }
-
-    function onSentenceAnswerableItemChange(answerableId: number, answerItemId: number, value: string) {
-        props.onSentenceAnswerableItemChange(props.rcSentenceDTO.id,answerableId,answerItemId,value);
     }
 
 
@@ -29,8 +25,7 @@ export default function RCSentenceComponentStratEditor(props: { rcSentenceDTO: M
                 return (
                     <div className="mb-3" key={assignable.id}>
                         <label htmlFor="exampleInputEmail1" className="form-label">Radio choice component</label>
-                        <MRCEditorAnswerableWidget mrcAnswerable={assignable as MRCAnswerable}
-                                                   onSentenceAnswerableItemChange={onSentenceAnswerableItemChange}/>
+                        <MRCEditorAnswerableWidget mrcAnswerable={assignable as MRCAnswerable}/>
                         <button>Add new choice</button>
                     </div>)
             case AssignableDTO.Type.Undefined:

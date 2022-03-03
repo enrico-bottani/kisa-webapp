@@ -9,19 +9,12 @@ import MRCAnswerable from "../../model/assignable/MRCAnswerable";
 import Exercise from "../../model/exercise/Exercise";
 
 interface Props {
-    stageRCSentenceEdits: (sentenceId: number, rcSentenceDTO: MRCSentenceDTO) => void;
     rcSentenceDTO: MRCSentence;
-    onSentenceAnswerableItemChange:(sId: number, aId: number, aItId: number, value: string)=>void;
-    setToUpdate(fn: (e: Exercise) => Exercise): void;
 }
 
 
 function RCSentenceEditor(props: Props) {
     let marginTop = 2;
-
-    function onSentenceAnswerableItemChange(sId: number, aId: number, aItId: number, value: string) {
-        props.onSentenceAnswerableItemChange(sId,aId,aItId,value);
-    }
 
 
     return (
@@ -52,8 +45,7 @@ function RCSentenceEditor(props: Props) {
                 </div>
                 {
                     <EditorStep number={1} title="Write the body:" paddingTop={marginTop} paddingBottom={marginTop}>
-                        <RCSentenceComponentStratEditor rcSentenceDTO={props.rcSentenceDTO}
-                                                        onSentenceAnswerableItemChange={onSentenceAnswerableItemChange}/>
+                        <RCSentenceComponentStratEditor rcSentenceDTO={props.rcSentenceDTO}/>
                     </EditorStep>
                 }
             </div>
