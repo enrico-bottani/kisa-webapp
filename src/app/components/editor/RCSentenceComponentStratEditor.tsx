@@ -5,8 +5,9 @@ import MRCAnswerable from "../../model/assignable/MRCAnswerable";
 import {ChangeEvent} from "react";
 import MRCEditorAnswerableWidget from "./MRCEditorAnswerableWidget";
 import Exercise from "../../model/exercise/Exercise";
+import MRCAnswerableItem from "../../model/MRCAnswerableItem";
 
-export default function RCSentenceComponentStratEditor(props: { rcSentenceDTO: MRCSentence}) {
+export default function RCSentenceComponentStratEditor(props: { rcSentenceDTO: MRCSentence,fetchExercise:(mrc:MRCAnswerableItem)=>void}) {
 
     function getString(assignable: Assignable) {
         return (<div className="mb-3" key={assignable.id}>
@@ -25,7 +26,7 @@ export default function RCSentenceComponentStratEditor(props: { rcSentenceDTO: M
                 return (
                     <div className="mb-3" key={assignable.id}>
                         <label htmlFor="exampleInputEmail1" className="form-label">Radio choice component</label>
-                        <MRCEditorAnswerableWidget mrcAnswerable={assignable as MRCAnswerable}/>
+                        <MRCEditorAnswerableWidget fetchExercise={props.fetchExercise} mrcAnswerable={assignable as MRCAnswerable}/>
                         <button>Add new choice</button>
                     </div>)
             case AssignableDTO.Type.Undefined:

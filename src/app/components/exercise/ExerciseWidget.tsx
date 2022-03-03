@@ -9,6 +9,7 @@ import RCSentenceEditor from "../editor/RCSentenceEditor";
 import {MRCSentence} from "../../model/epage/MRCSentence";
 import MRCAnswerable from "../../model/assignable/MRCAnswerable";
 import ExercisePage from "../../model/epage/ExercisePage";
+import MRCAnswerableItem from "../../model/MRCAnswerableItem";
 
 export default function ExerciseWidget() {
     let params = useParams();
@@ -17,8 +18,12 @@ export default function ExerciseWidget() {
     let [exercise, setExercise] = useState(Exercise.builder().setId(exerciseId).build());
     let [netState, setNetState] = useState(NetState.NET_STATE_LOADING);
 
-    useEffect(() => {
-        console.log("API CALL")
+    function downloadExercise(mrc:MRCAnswerableItem|null){
+        if (mrc!==null){
+            let page = exercise.pages.find(p=>p.id==mrc._exercisePageId);
+            console.log("Update using the page reference, we need a tree with double linked nodes")
+        }
+
         ExerciseClient.getExercise(exerciseId)
             .then(exe => {
                 setExercise(ExerciseMapper.map(exe, 0))
@@ -26,6 +31,11 @@ export default function ExerciseWidget() {
                 setNetState(NetState.NET_STATE_OK)
             })
             .catch(e => setNetState(NetState.NET_STATE_ERROR))
+    }
+
+    useEffect(() => {
+        console.log("API CALL")
+        downloadExercise(null);
     }, [])
 
 
@@ -68,6 +78,6 @@ export default function ExerciseWidget() {
 
             }
 
-            <RCSentenceEditor rcSentenceDTO={exercisePageToRender as MRCSentence}/>
+            <RCSentenceEditor rcSentenceDTO={exercisePageToRender as MRCSentence} fetchExercise={downloadExercise}/>
         </div>);
 }

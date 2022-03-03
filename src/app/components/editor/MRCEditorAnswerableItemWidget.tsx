@@ -3,7 +3,7 @@ import {isBoolean} from "util";
 import {useState} from "react";
 import ExerciseClient from "../../client/ExerciseClient";
 
-export default function MRCEditorAnswerableItemWidget(props: { answerableItem: MRCAnswerableItem }) {
+export default function MRCEditorAnswerableItemWidget(props: { answerableItem: MRCAnswerableItem,fetchExercise:(mrc:MRCAnswerableItem)=>void}) {
     let [typing, setTyping] = useState(setTimeout(() => {
     }, 0));
     let [synced, setSynced] = useState(true);
@@ -16,8 +16,8 @@ export default function MRCEditorAnswerableItemWidget(props: { answerableItem: M
             console.log("PUT /answerable_item/" + props.answerableItem.id + ".json")
             let answItem = props.answerableItem.clone();
             answItem.choice = e.target.value;
-            ExerciseClient.putAnswerableItem(props.answerableItem.id,answItem)
-                .then(()=>{setSynced(true)}).catch(e=>console.error(e));
+            ExerciseClient.putAnswerableItem(answItem.id,answItem)
+                .then(()=>{setSynced(true);props.fetchExercise(answItem)}).catch(e=>console.error(e));
         }, 1000));
     }
 

@@ -7,9 +7,11 @@ import {stringify} from "querystring";
 import RCSentenceComponentStratEditor from "./RCSentenceComponentStratEditor";
 import MRCAnswerable from "../../model/assignable/MRCAnswerable";
 import Exercise from "../../model/exercise/Exercise";
+import MRCAnswerableItem from "../../model/MRCAnswerableItem";
 
 interface Props {
     rcSentenceDTO: MRCSentence;
+    fetchExercise: (mrc:MRCAnswerableItem) => void;
 }
 
 
@@ -44,8 +46,9 @@ function RCSentenceEditor(props: Props) {
                     </div>
                 </div>
                 {
-                    <EditorStep number={1} title="Write the body:" paddingTop={marginTop} paddingBottom={marginTop}>
-                        <RCSentenceComponentStratEditor rcSentenceDTO={props.rcSentenceDTO}/>
+                    <EditorStep number={1} title="Write the body:" paddingTop={marginTop}
+                                paddingBottom={marginTop} >
+                        <RCSentenceComponentStratEditor rcSentenceDTO={props.rcSentenceDTO} fetchExercise={props.fetchExercise}/>
                     </EditorStep>
                 }
             </div>
