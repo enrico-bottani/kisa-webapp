@@ -16,4 +16,10 @@ export default class MRCAnswerableItem {
         this._exercisePageId = exercisePageId;
         this._exerciseId = exerciseId;
     }
+    public clone():MRCAnswerableItem{
+        return new MRCAnswerableItem(this.id, this.choice, this.solution,
+            this._assignableId,
+            this._exercisePageId,
+            this._exerciseId);
+    }
 }
