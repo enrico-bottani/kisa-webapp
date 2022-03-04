@@ -9,7 +9,7 @@ import Editor_MRCAnswerableItem_Widget from "./Editor_MRCAnswerableItem_Widget";
  */
 export default function MRCEditorAnswerableWidget(props: {
     mrcAnswerable: MRCAnswerable,
-    fetchExercise: (mrc: MRCAnswerableItem) => void,
+    fetchExercise: () => void,
 }) {
 
 

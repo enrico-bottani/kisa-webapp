@@ -6,24 +6,22 @@ import {ChangeEvent} from "react";
 import MRCEditorAnswerableWidget from "./MRCEditorAnswerableWidget";
 import Exercise from "../../model/exercise/Exercise";
 import MRCAnswerableItem from "../../model/MRCAnswerableItem";
+import Editor_STRConstantItem_Widget from "./Editor_STRConstantItem_Widget";
+import STRConstant from "../../model/assignable/STRConstant";
 
 export default function RCSentenceComponentStratEditor(props: {
     rcSentenceDTO: MRCSentence,
-    fetchExercise:(mrc:MRCAnswerableItem)=>void}) {
+    fetchExercise:()=>void}) {
 
-    function getString(assignable: Assignable) {
-        return (<div className="mb-3" key={assignable.id}>
-            <label htmlFor="exampleInputEmail1" className="form-label">Text component</label>
-            <input type="text" className="form-control rounded-0" id="exampleInputEmail1"
-                   aria-describedby="emailHelp"/>
-        </div>);
+    function getString(assignable: STRConstant) {
+        return (<Editor_STRConstantItem_Widget fetchExercise={props.fetchExercise} strConstant={assignable} key={assignable.id}/>);
     }
 
 
     let toRender = props.rcSentenceDTO.assignables.map(assignable => {
         switch (assignable.type) {
             case AssignableDTO.Type.String:
-                return getString(assignable)
+                return getString(assignable as STRConstant)
             case AssignableDTO.Type.RCAnswerable:
                 return (
                     <div className="mb-3" key={assignable.id}>

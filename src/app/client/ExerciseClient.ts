@@ -1,5 +1,6 @@
 import {ExerciseDTO} from "../dto/exercise/ExerciseDTO";
 import MRCAnswerableItem from "../model/MRCAnswerableItem";
+import STRConstant from "../model/assignable/STRConstant";
 
 export default class ExerciseClient {
     static getExercises(): Promise<ExerciseDTO[]> {
@@ -26,6 +27,22 @@ export default class ExerciseClient {
         return fetch("http://localhost:8081/answerable_item/" + answerableItemId + ".json",
             {method: "PUT",
                 body: JSON.stringify(answerableItem),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }})
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json() as Promise<ExerciseDTO>
+            });
+    }
+
+    static putSTRConstant(id: number, strConstant: STRConstant) {
+        return fetch("http://localhost:8081/str_constant/" + id + ".json",
+            {method: "PUT",
+                body: JSON.stringify(strConstant),
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'

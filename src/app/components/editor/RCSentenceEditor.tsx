@@ -11,7 +11,7 @@ import MRCAnswerableItem from "../../model/MRCAnswerableItem";
 
 interface Props {
     rcSentenceDTO: MRCSentence;
-    fetchExercise: (mrc: MRCAnswerableItem) => void;
+    fetchExercise: () => void;
 }
 
 

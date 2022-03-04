@@ -9,4 +9,8 @@ export default class STRConstant extends Assignable implements STRConstantDTO {
         super(id, type, position);
         this.string = value;
     }
+
+    clone() {
+        return new STRConstant(this.id,this.type,this.position,this.string);
+    }
 }

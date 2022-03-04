@@ -5,7 +5,7 @@ import ExerciseClient from "../../client/ExerciseClient";
 
 export default function Editor_MRCAnswerableItem_Widget(props: {
     answerableItem: MRCAnswerableItem,
-    fetchExercise: (mrc: MRCAnswerableItem) => void }) {
+    fetchExercise: () => void }) {
     let [typing, setTyping] = useState(setTimeout(() => {
     }, 0));
     let [synced, setSynced] = useState(true);
@@ -22,9 +22,9 @@ export default function Editor_MRCAnswerableItem_Widget(props: {
             ExerciseClient.putAnswerableItem(answItem.id, answItem.cloneDeletingCircularReferences())
                 .then(() => {
                     setSynced(true);
-                    props.fetchExercise(answItem)
+                    props.fetchExercise()
                 }).catch(e => console.error(e));
-        }, 1000));
+        }, 500));
     }
 
 
