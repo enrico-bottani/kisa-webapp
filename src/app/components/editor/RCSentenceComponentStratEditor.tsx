@@ -8,6 +8,8 @@ import Exercise from "../../model/exercise/Exercise";
 import MRCAnswerableItem from "../../model/MRCAnswerableItem";
 import Editor_STRConstantItem_Widget from "./Editor_STRConstantItem_Widget";
 import STRConstant from "../../model/assignable/STRConstant";
+import ExerciseClient from "../../client/ExerciseClient";
+import {ClientRequest} from "http";
 
 export default function RCSentenceComponentStratEditor(props: {
     rcSentenceDTO: MRCSentence,
@@ -20,6 +22,10 @@ export default function RCSentenceComponentStratEditor(props: {
     }
 
 
+    function handleOnClick(e: React.MouseEvent<HTMLButtonElement>, assignableId: number) {
+        ExerciseClient.postNewAnswerableItem(assignableId).then(() => props.fetchExercise());
+    }
+
     let toRender = props.rcSentenceDTO.assignables.map(assignable => {
         switch (assignable.type) {
             case AssignableDTO.Type.String:
@@ -31,7 +37,8 @@ export default function RCSentenceComponentStratEditor(props: {
                         <MRCEditorAnswerableWidget fetchExercise={props.fetchExercise}
                                                    mrcAnswerable={assignable as MRCAnswerable}/>
                         <div>
-                            <button className={"btn btn-outline-secondary rounded-0"}>
+                            <button className={"btn btn-outline-secondary rounded-0"}
+                                    onClick={(e) => handleOnClick(e, assignable.id)}>
                                 <i className="bi bi-plus-circle"/>&nbsp;Add new choice
                             </button>
                         </div>
@@ -46,8 +53,15 @@ export default function RCSentenceComponentStratEditor(props: {
         }
     })
 
+
+    function handleAddComponentOnClick(sentenceId:number) {
+        ExerciseClient.postNewAssignableBySentenceId(sentenceId).then(()=>props.fetchExercise());
+    }
+
     return (<div>
         {toRender}
-        <button className={"btn btn-secondary rounded-0"}><i className="bi bi-plus"/>&nbsp;Add new component</button>
+        <button className={"btn btn-secondary rounded-0"} onClick={()=>handleAddComponentOnClick(props.rcSentenceDTO.id)}
+        ><i className="bi bi-plus"/>&nbsp;Add new component
+        </button>
     </div>)
 }

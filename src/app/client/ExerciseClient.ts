@@ -54,4 +54,32 @@ export default class ExerciseClient {
                 return response.json() as Promise<ExerciseDTO>
             });
     }
+    static postNewAnswerableItem(id: number) {
+        return fetch("http://localhost:8081/answerable/" + id + "/answerable_item.json",
+            {method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }})
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json() as Promise<ExerciseDTO>
+            });
+    }
+    static postNewAssignableBySentenceId(sentenceId: number) {
+        return fetch("http://localhost:8081/sentence/" + sentenceId + "/assignable.json",
+            {method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }})
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json() as Promise<ExerciseDTO>
+            });
+    }
 }
