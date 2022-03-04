@@ -7,7 +7,9 @@ import MRCEditorAnswerableWidget from "./MRCEditorAnswerableWidget";
 import Exercise from "../../model/exercise/Exercise";
 import MRCAnswerableItem from "../../model/MRCAnswerableItem";
 
-export default function RCSentenceComponentStratEditor(props: { rcSentenceDTO: MRCSentence,fetchExercise:(mrc:MRCAnswerableItem)=>void}) {
+export default function RCSentenceComponentStratEditor(props: {
+    rcSentenceDTO: MRCSentence,
+    fetchExercise:(mrc:MRCAnswerableItem)=>void}) {
 
     function getString(assignable: Assignable) {
         return (<div className="mb-3" key={assignable.id}>

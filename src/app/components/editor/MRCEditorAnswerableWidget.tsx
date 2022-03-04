@@ -1,7 +1,6 @@
 import MRCAnswerable from "../../model/assignable/MRCAnswerable";
-import Exercise from "../../model/exercise/Exercise";
-import MRCEditorAnswerableItemWidget from "./MRCEditorAnswerableItemWidget";
 import MRCAnswerableItem from "../../model/MRCAnswerableItem";
+import Editor_MRCAnswerableItem_Widget from "./Editor_MRCAnswerableItem_Widget";
 
 /**
  * Multiple Radio Choice Answerable Widget
@@ -9,7 +8,9 @@ import MRCAnswerableItem from "../../model/MRCAnswerableItem";
  * @constructor
  */
 export default function MRCEditorAnswerableWidget(props: {
-    mrcAnswerable: MRCAnswerable,fetchExercise:(mrc:MRCAnswerableItem)=>void}) {
+    mrcAnswerable: MRCAnswerable,
+    fetchExercise: (mrc: MRCAnswerableItem) => void,
+}) {
 
 
     function onChange(e: React.ChangeEvent<HTMLInputElement>, id: number) {
@@ -18,7 +19,8 @@ export default function MRCEditorAnswerableWidget(props: {
     }
 
     let mrcAnswerableElement = props.mrcAnswerable.answerableItems.map(answerableItem => {
-        return (<MRCEditorAnswerableItemWidget fetchExercise={props.fetchExercise} answerableItem={answerableItem} key={answerableItem.id}/>)
+        return (<Editor_MRCAnswerableItem_Widget fetchExercise={props.fetchExercise} answerableItem={answerableItem}
+                                                 key={answerableItem.id}/>)
     });
     return (<>{mrcAnswerableElement}</>)
 }

@@ -29,7 +29,7 @@ export default class AssignableMapper {
 
     private static setAnswerableItemsWithParent(assign: MRCAnswerableDTO, _parent: MRCAnswerable) {
         var ansItems = assign.answerableItems.map(answItem =>
-            new MRCAnswerableItem(answItem.id, answItem.choice, answItem.solution).setParent(_parent))
+            new MRCAnswerableItem(answItem.id, answItem.choice, answItem.solution))
         return ansItems;
     }
 }

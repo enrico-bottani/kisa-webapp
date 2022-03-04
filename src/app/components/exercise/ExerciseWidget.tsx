@@ -18,12 +18,7 @@ export default function ExerciseWidget() {
     let [exercise, setExercise] = useState(Exercise.builder().setId(exerciseId).build());
     let [netState, setNetState] = useState(NetState.NET_STATE_LOADING);
 
-    function downloadExercise(mrc:MRCAnswerableItem|null){
-        if (mrc!==null){
-            let page = exercise.pages.find(p=>p.id==mrc.id);
-            console.log("Update using the page reference, we need a tree with double linked nodes")
-        }
-
+    function downloadExercise() {
         ExerciseClient.getExercise(exerciseId)
             .then(exe => {
                 setExercise(ExerciseMapper.map(exe, 0))
@@ -35,7 +30,7 @@ export default function ExerciseWidget() {
 
     useEffect(() => {
         console.log("API CALL")
-        downloadExercise(null);
+        downloadExercise();
     }, [])
 
 
@@ -49,8 +44,8 @@ export default function ExerciseWidget() {
     console.log(exercise.pages.length)
 
     let exercisePageToRender = exercise.pages[exercise.selected];
-    if (exercisePageToRender===undefined){
-        exercisePageToRender = new MRCSentence(-1,ExercisePage.Type.RCSentenceType,-1,false)
+    if (exercisePageToRender === undefined) {
+        exercisePageToRender = new MRCSentence(-1, ExercisePage.Type.RCSentenceType, -1, false)
             .setAssignables([]);
     }
     return (
@@ -79,6 +74,7 @@ export default function ExerciseWidget() {
 
             }
 
-            <RCSentenceEditor rcSentenceDTO={exercisePageToRender as MRCSentence} fetchExercise={downloadExercise}/>
+            <RCSentenceEditor rcSentenceDTO={exercisePageToRender as MRCSentence}
+                              fetchExercise={downloadExercise}/>
         </div>);
 }

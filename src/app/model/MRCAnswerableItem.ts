@@ -3,19 +3,24 @@ import {MRCAnswerableDTO} from "../dto/assignable/MRCAnswerableDTO";
 import MRCAnswerable from "./assignable/MRCAnswerable";
 import MRCAnswerableItemDTO from "../dto/item/MRCAnswerableItemDTO";
 
-export default class MRCAnswerableItem implements MRCAnswerableItemDTO{
-    id: number; choice: string; solution: number;
-    _parent:MRCAnswerable|null=null;
+export default class MRCAnswerableItem implements MRCAnswerableItemDTO {
+    id: number;
+    choice: string;
+    solution: number;
+
     constructor(id: number, choice: string, solution: number) {
         this.id = id;
         this.choice = choice;
         this.solution = solution;
     }
-    public clone():MRCAnswerableItem{
-        return new MRCAnswerableItem(this.id, this.choice, this.solution);
+
+    public clone(): MRCAnswerableItem {
+        let rtn = new MRCAnswerableItem(this.id, this.choice, this.solution);
+        return rtn;
     }
-    public setParent(_parent:MRCAnswerable):MRCAnswerableItem{
-        this._parent = _parent;
-        return this;
+
+    public cloneDeletingCircularReferences(): MRCAnswerableItem {
+        let rtn = new MRCAnswerableItem(this.id, this.choice, this.solution);
+        return rtn;
     }
 }
