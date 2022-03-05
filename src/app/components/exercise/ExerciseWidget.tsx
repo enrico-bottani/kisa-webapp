@@ -67,6 +67,7 @@ export default function ExerciseWidget() {
                     setSelectedExercise(page)
                 }}
                 createNewDraft={() => {
+                    ExerciseClient.postNewEmptyExercisePage(exercise.id).then(()=>downloadExercise());
                 }}/>
 
             {

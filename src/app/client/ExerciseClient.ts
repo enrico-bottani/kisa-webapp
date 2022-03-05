@@ -22,7 +22,23 @@ export default class ExerciseClient {
                 return response.json() as Promise<ExerciseDTO>
             });
     }
+    static postNewEmptyExercisePage(exerciseId: number) {
 
+        return fetch("http://localhost:8081/exercises/" + exerciseId + "/mrc_sentence.json",
+            {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json() as Promise<ExerciseDTO>
+            });
+    }
     static putAnswerableItem(answerableItemId: number, answerableItem: MRCAnswerableItem): Promise<ExerciseDTO> {
         return fetch("http://localhost:8081/answerable_item/" + answerableItemId + ".json",
             {
@@ -110,4 +126,6 @@ export default class ExerciseClient {
                 return response.json() as Promise<ExerciseDTO>
             });
     }
+
+
 }
