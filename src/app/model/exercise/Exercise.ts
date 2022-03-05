@@ -45,7 +45,7 @@ export class Exercise implements ExerciseDTO {
     }
 
     clone(): Exercise {
-        return new Exercise(this.id, this.title, this.selected, JSON.parse(JSON.stringify(this.pages)));
+        return new Exercise(this.id, this.title, this.selected, this.pages);
 
     }
 

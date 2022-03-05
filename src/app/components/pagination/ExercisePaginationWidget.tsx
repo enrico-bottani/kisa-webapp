@@ -8,7 +8,6 @@ interface Props {
     excercise: Exercise;
     pageNumber: number;
     onSetPage: any;
-
     createNewDraft(type: ExercisePage.Type.RCSentenceType): any
 }
 
