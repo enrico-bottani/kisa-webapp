@@ -9,11 +9,15 @@ import STRConstant from "../../model/assignable/STRConstant";
 
 interface Props {
     rcSentenceDTO: MRCSentenceDTO;
+    editMode?:boolean;
 }
 
 function RCEditorPreviewWrapper(props: Props) {
     var singleChoiceSentence = props.rcSentenceDTO;
     let gapKeyCounter = 0;
+
+    let editMode = props.editMode===true?1:0;
+
     let children = singleChoiceSentence.assignables.map((a, id) => {
         switch (a.type) {
             case AssignableDTO.Type.String:
@@ -30,7 +34,7 @@ function RCEditorPreviewWrapper(props: Props) {
                         key={id}
                         gapKey={gapKeyCounter - 1}
                         rcAnswerableDTO={(a as MRCAnswerable)}
-                        editMode={1}/>
+                        editMode={editMode}/>
                 );
             default:
                 return <></>

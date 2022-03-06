@@ -11,7 +11,7 @@ import '@popperjs/core';
 import 'bootstrap/dist/js/bootstrap.min.js'
 import {BrowserRouter, Route, Routes, useParams} from "react-router-dom";
 import ExercisesSelectorWidget from "./app/components/exercise/ExercisesSelectorWidget";
-import ExerciseWidget from "./app/components/exercise/ExerciseWidget";
+import Editor_ExerciseWidget from "./app/components/editor/Editor_ExerciseWidget";
 
 
 ReactDOM.render(
@@ -20,7 +20,7 @@ ReactDOM.render(
             <Routes>
                 <Route path="/" element={<App/>}>
                     <Route path="edit/exercises" element={<ExercisesSelectorWidget/>}/>
-                    <Route path="edit/exercises/:exercise" element={<ExerciseWidget />} />
+                    <Route path="edit/exercises/:exercise" element={<Editor_ExerciseWidget editMode={true}/>} />
                 </Route>
             </Routes>
         </BrowserRouter>

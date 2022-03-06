@@ -12,27 +12,28 @@ interface Props {
 function RCChoices(props: Props) {
     let [givenAnswer, setGivenAnswer] = useState(-1)
 
+    function broadcastRadioChange(id:number){
+        console.log("rdchange: "+id)
+        setGivenAnswer(id);
+
+    }
 
     let child = (props.rcAnswerableDTO.answerableItems.map((choice, i) => {
         let id = "rc_" + i;
-        return (
-            <div key={id} className="col-auto">
-                <RCButton
-                    answerI={i}
+        return (<RCButton
+                    notifyChange={broadcastRadioChange}
+                    givenAnswer={givenAnswer}
+                    key={id}
                     gapKey={props.gapKey}
-                    choice={choice.choice}
-                    editMode={1}
-                />
-            </div>)
+                    choice={choice}
+                    editMode={props.editMode}
+                />)
     }))
     return (
         <div className="col-auto d-flex">
-            <div className="container p-0">
-                <div className="row gx-1">
-                    {child}
-                </div>
+            <div className="btn-group" role="group">
+                {child}
             </div>
-
         </div>
     )
 }

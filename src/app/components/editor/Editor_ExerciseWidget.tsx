@@ -1,5 +1,5 @@
 import {useParams} from "react-router-dom";
-import React, {useEffect, useState} from "react";
+import React, {Props, useEffect, useState} from "react";
 import Exercise from "../../model/exercise/Exercise";
 import ExerciseClient from "../../client/ExerciseClient";
 import ExerciseMapper from "../../mapper/ExerciseMapper";
@@ -10,8 +10,10 @@ import {MRCSentence} from "../../model/epage/MRCSentence";
 import MRCAnswerable from "../../model/assignable/MRCAnswerable";
 import ExercisePage from "../../model/epage/ExercisePage";
 import MRCAnswerableItem from "../../model/MRCAnswerableItem";
+import EditorStep from "./utils/EditorStep";
+import RCEditorPreviewWrapper from "../preview/RCEditorPreviewWrapper";
 
-export default function ExerciseWidget() {
+export default function Editor_ExerciseWidget(props:{editMode:boolean}) {
     let params = useParams();
     let exerciseId = Number(params.exercise);
 
@@ -46,9 +48,19 @@ export default function ExerciseWidget() {
 
     let pageToDisplay = exercise.pages.find(p=>p.id===selectedIdNumber)
     let pageJSX = <></>
-    if (pageToDisplay !== undefined) {
+    if (pageToDisplay !== undefined && props.editMode) {
      pageJSX =   <RCSentenceEditor rcSentenceDTO={pageToDisplay as MRCSentence}
                                       fetchExercise={downloadExercise}/>
+    }
+    else if (pageToDisplay !== undefined){
+        pageJSX =<div className={"container"}>
+            <div className='row gx-0 border-bottom border-2 mb-3 pb-2 d-flex align-items-center'>
+                <div className="col">
+
+                        <RCEditorPreviewWrapper editMode={props.editMode} rcSentenceDTO={pageToDisplay as MRCSentence}/>
+                </div>
+            </div>
+        </div>
     }
 
     return (
