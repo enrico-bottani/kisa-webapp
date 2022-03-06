@@ -19,8 +19,10 @@ ReactDOM.render(
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<App/>}>
-                    <Route path="edit/exercises" element={<ExercisesSelectorWidget/>}/>
+                    <Route path="edit/exercises" element={<ExercisesSelectorWidget  editMode={true}/>}/>
                     <Route path="edit/exercises/:exercise" element={<Editor_ExerciseWidget editMode={true}/>} />
+                    <Route path="exercises" element={<ExercisesSelectorWidget  editMode={false}/>}/>
+                    <Route path="exercises/:exercise" element={<Editor_ExerciseWidget editMode={false}/>} />
                 </Route>
             </Routes>
         </BrowserRouter>
