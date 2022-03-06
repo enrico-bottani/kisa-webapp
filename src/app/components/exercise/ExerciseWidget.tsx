@@ -17,7 +17,7 @@ export default function ExerciseWidget() {
 
     let [exercise, setExercise] = useState(Exercise.builder().setId(exerciseId).build());
     let [netState, setNetState] = useState(NetState.NET_STATE_LOADING);
-    let [selectedExercise, setSelectedExercise] = useState(0);
+    let [selectedPageNumber, setSelectedPageNumber] = useState(0);
     function downloadExercise() {
         ExerciseClient.getExercise(exerciseId)
             .then(exe => {
@@ -43,7 +43,7 @@ export default function ExerciseWidget() {
 
     console.log(exercise.pages.length)
 
-    let exercisePageToRender = exercise.pages[selectedExercise];
+    let exercisePageToRender = exercise.pages[selectedPageNumber];
     if (exercisePageToRender === undefined) {
         exercisePageToRender = new MRCSentence(-1, ExercisePage.Type.RCSentenceType, -1, false)
             .setAssignables([]);
@@ -62,9 +62,9 @@ export default function ExerciseWidget() {
             }
             <ExercisePaginationWidget
                 excercise={exercise}
-                pageNumber={selectedExercise}
+                pageNumber={selectedPageNumber}
                 onSetPage={(page: number) => {
-                    setSelectedExercise(page)
+                    setSelectedPageNumber(page)
                 }}
                 createNewDraft={() => {
                     ExerciseClient.postNewEmptyExercisePage(exercise.id).then(()=>downloadExercise());
