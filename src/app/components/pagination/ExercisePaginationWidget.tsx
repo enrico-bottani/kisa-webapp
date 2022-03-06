@@ -6,7 +6,7 @@ import Exercise from "../../model/exercise/Exercise";
 
 interface Props {
     excercise: Exercise;
-    pageNumber: number;
+    idNumber: number;
     onSetPage: any;
     createNewDraft(type: ExercisePage.Type.RCSentenceType): any
 }
@@ -14,9 +14,10 @@ interface Props {
 function ExercisePaginationWidget(props: Props) {
     var listItems = props.excercise.pages.map((sentence, i) => {
         return (<TodoPage
+            label={i+1+""}
             key={"todo-page-" + i}
-            representingTodoNumber={sentence.position}
-            currentTodoNumber={props.pageNumber}
+            representingTodoNumber={sentence.id}
+            currentTodoNumber={props.idNumber}
             errorsNumber={-1}
             onSetSelected={props.onSetPage}/>)
     });

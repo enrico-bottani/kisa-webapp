@@ -6,6 +6,7 @@ interface Props {
     currentTodoNumber: number;
     errorsNumber: number;
     onSetSelected: any;
+    label: string;
     key: any;
 }
 
@@ -23,13 +24,13 @@ function TodoPage(props: Props) {
         btnClass += "btn-outline-success ";
         sign = <i className="bi bi-check-lg"></i>;
     }
-    var label = "" + (props.representingTodoNumber + 1);
+    var id = "" + (props.representingTodoNumber + 1);
 
     return <GenericTodoButton<number>
     sign={sign}
     onClick={props.onSetSelected}
-    label={label}
-    id={label}
+    label={props.label}
+    id={id}
     btnClass={btnClass}
     param={props.representingTodoNumber}/>
 }
