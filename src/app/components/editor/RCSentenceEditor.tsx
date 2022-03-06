@@ -32,8 +32,20 @@ function RCSentenceEditor(props: Props) {
                         </div>
                         <div className="col ms-3"><h2 className='mb-0'>Radio Choice Editor</h2></div>
                         <div className="col-auto">
-                            <div className="btn btn-outline-secondary rounded-0 border-0">
-                                <i className="bi bi-three-dots"/></div>
+                            <div className="btn-group" role="group" aria-label="Button group with nested dropdown">
+                                <button className="btn btn-outline-secondary rounded-0 border-0" data-bs-toggle="dropdown">
+
+                                </button>
+                                <div className="btn-group" role="group">
+                                    <button id="btnGroupDrop1" type="button" className="btn btn-outline-secondary rounded-0 border-0 "
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i className="bi bi-three-dots"/>
+                                    </button>
+                                    <ul className="dropdown-menu rounded-0 border-2" aria-labelledby="btnGroupDrop1">
+                                        <li><a className="dropdown-item" href="#">Delete sentence</a></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className='row gx-0 border-bottom border-2 mb-3 pb-2 d-flex align-items-center'>
