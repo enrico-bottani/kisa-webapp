@@ -128,4 +128,20 @@ export default class ExerciseClient {
     }
 
 
+    static deleteExercisePage(sentenceId: number) {
+        return fetch("http://localhost:8081/sentence/" + sentenceId + ".json",
+            {
+                method: "DELETE",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+    .then((response) => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response;
+        });
+    }
 }

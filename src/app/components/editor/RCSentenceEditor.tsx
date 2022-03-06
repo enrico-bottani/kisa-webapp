@@ -8,6 +8,7 @@ import RCSentenceComponentStratEditor from "./RCSentenceComponentStratEditor";
 import MRCAnswerable from "../../model/assignable/MRCAnswerable";
 import Exercise from "../../model/exercise/Exercise";
 import MRCAnswerableItem from "../../model/MRCAnswerableItem";
+import ExerciseClient from "../../client/ExerciseClient";
 
 interface Props {
     rcSentenceDTO: MRCSentence;
@@ -18,6 +19,11 @@ interface Props {
 function RCSentenceEditor(props: Props) {
     let marginTop = 2;
 
+
+    function deleteSentence() {
+        let id = props.rcSentenceDTO.id;
+        ExerciseClient.deleteExercisePage(id).then(()=>{props.fetchExercise()});
+    }
 
     return (
         <div className={"container"}>
@@ -42,7 +48,7 @@ function RCSentenceEditor(props: Props) {
                                         <i className="bi bi-three-dots"/>
                                     </button>
                                     <ul className="dropdown-menu rounded-0 border-2" aria-labelledby="btnGroupDrop1">
-                                        <li><a className="dropdown-item" href="#">Delete sentence</a></li>
+                                        <li><a className="dropdown-item" href="#" onClick={deleteSentence}>Delete sentence</a></li>
                                     </ul>
                                 </div>
                             </div>
