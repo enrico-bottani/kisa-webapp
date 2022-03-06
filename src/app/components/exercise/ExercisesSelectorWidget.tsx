@@ -25,7 +25,7 @@ export default function ExercisesSelectorWidget() {
         case NetState.NET_STATE_OK: {
             element = (<>{exercises.map(exe => {
                     return (
-                        <div key={exe.id}><a href={"/exercises/" + exe.id}>{exe.id}&nbsp;{exe.title}</a></div>
+                        <div key={exe.id}><a href={"/edit/exercises/" + exe.id}>{exe.id}&nbsp;{exe.title}</a></div>
                     )})}
                 </>
             )

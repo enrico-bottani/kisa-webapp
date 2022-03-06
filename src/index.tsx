@@ -19,8 +19,8 @@ ReactDOM.render(
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<App/>}>
-                    <Route path="exercises" element={<ExercisesSelectorWidget/>}/>
-                    <Route path="exercises/:exercise" element={<ExerciseWidget />} />
+                    <Route path="edit/exercises" element={<ExercisesSelectorWidget/>}/>
+                    <Route path="edit/exercises/:exercise" element={<ExerciseWidget />} />
                 </Route>
             </Routes>
         </BrowserRouter>
