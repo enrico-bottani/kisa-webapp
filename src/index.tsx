@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
@@ -12,13 +12,15 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 import {BrowserRouter, Route, Routes, useParams} from "react-router-dom";
 import ExercisesSelectorWidget from "./app/components/exercise/ExercisesSelectorWidget";
 import Editor_ExerciseWidget from "./app/components/editor/Editor_ExerciseWidget";
-
+import Cookies from 'js-cookie';
+import LoginWidget from "./app/components/login/LoginWidget";
 
 ReactDOM.render(
     <React.StrictMode>
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<App/>}>
+                    <Route path="login" element={<LoginWidget/>}/>
                     <Route path="edit/exercises" element={<ExercisesSelectorWidget  editMode={true}/>}/>
                     <Route path="edit/exercises/:exercise" element={<Editor_ExerciseWidget editMode={true}/>} />
                     <Route path="exercises" element={<ExercisesSelectorWidget  editMode={false}/>}/>

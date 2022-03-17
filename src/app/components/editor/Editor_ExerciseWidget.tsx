@@ -30,38 +30,31 @@ export default function Editor_ExerciseWidget(props:{editMode:boolean}) {
             })
             .catch(e => setNetState(NetState.NET_STATE_ERROR))
     }
+    function sentenceRendering() {
+        // Select the page to display
+        let pageToDisplay = exercise.pages.find(p=>p.id===selectedIdNumber)
+
+        let pageJSX = <></>
+        if (pageToDisplay !== undefined && props.editMode) {
+            pageJSX = <RCSentenceEditor rcSentenceDTO={pageToDisplay as MRCSentence}
+                                        fetchExercise={downloadExercise}/>
+        } else if (pageToDisplay !== undefined) {
+            pageJSX = <div className={"container"}>
+                <div className='row gx-0 border-bottom border-2 mb-3 pb-2 d-flex align-items-center'>
+                    <div className="col">
+                        <RCEditorPreviewWrapper editMode={props.editMode} rcSentenceDTO={pageToDisplay as MRCSentence}/>
+                    </div>
+                </div>
+            </div>
+        }
+        return pageJSX;
+    }
 
     useEffect(() => {
         console.log("API CALL")
         downloadExercise();
     }, [])
 
-
-    function cloneAndSetExercisePage(ex: Exercise, page: any) {
-        ex = ex.clone();
-        ex.selected = page;
-        console.log(ex);
-        return ex;
-    }
-
-    console.log(exercise.pages.length)
-
-    let pageToDisplay = exercise.pages.find(p=>p.id===selectedIdNumber)
-    let pageJSX = <></>
-    if (pageToDisplay !== undefined && props.editMode) {
-     pageJSX =   <RCSentenceEditor rcSentenceDTO={pageToDisplay as MRCSentence}
-                                      fetchExercise={downloadExercise}/>
-    }
-    else if (pageToDisplay !== undefined){
-        pageJSX =<div className={"container"}>
-            <div className='row gx-0 border-bottom border-2 mb-3 pb-2 d-flex align-items-center'>
-                <div className="col">
-
-                        <RCEditorPreviewWrapper editMode={props.editMode} rcSentenceDTO={pageToDisplay as MRCSentence}/>
-                </div>
-            </div>
-        </div>
-    }
 
     return (
         <div>
@@ -86,8 +79,8 @@ export default function Editor_ExerciseWidget(props:{editMode:boolean}) {
                 }}/>
 
             {
-                // Render editor here
-                pageJSX
+                // Render sentence
+                sentenceRendering()
             }
 
 
