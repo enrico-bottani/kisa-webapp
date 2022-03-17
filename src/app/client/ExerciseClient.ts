@@ -149,9 +149,13 @@ export default class ExerciseClient {
     }
 
     static getUsername(): Promise<ExerciseDTO> {
-        let csrfToken=  Cookies.get('XSRF-TOKEN');
+        let csrfToken = Cookies.get('XSRF-TOKEN');
         if (csrfToken==undefined) csrfToken="";
-        return fetch("http://localhost:8081/api/auth/user.json", {method: "GET", credentials: 'include'})
+        return fetch("http://localhost:8081/api/auth/user.json", {
+            mode:"cors",
+            method: "GET",
+            credentials: 'include'
+        })
             .then((response) => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);

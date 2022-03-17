@@ -14,9 +14,11 @@ export default function LoginWidget() {
         if (csrfToken==undefined) csrfToken="";
         fetch(request, {
             mode: "cors", method: "POST", headers: {
-                //'X-XSRF-TOKEN': csrfToken,
+                'X-XSRF-TOKEN': csrfToken,
                 'Content-Type': 'application/x-www-form-urlencoded'
-            }, credentials: 'include', body: "username=Enrico&password="+password
+            },
+            credentials: 'include',
+            body: "username=Enrico&password="+password
         }).then(
             response => {
                 return response.json();
