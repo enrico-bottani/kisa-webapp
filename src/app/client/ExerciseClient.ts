@@ -2,6 +2,7 @@ import {ExerciseDTO} from "../dto/exercise/ExerciseDTO";
 import MRCAnswerableItem from "../model/MRCAnswerableItem";
 import STRConstant from "../model/assignable/STRConstant";
 import Cookies from "js-cookie";
+import {UserDTO} from "../dto/auth/UserDTO";
 
 export default class ExerciseClient {
     static getExercises(): Promise<ExerciseDTO[]> {
@@ -50,7 +51,8 @@ export default class ExerciseClient {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
-                }
+                },
+                credentials: 'include'
             })
             .then((response) => {
                 if (!response.ok) {
@@ -67,7 +69,8 @@ export default class ExerciseClient {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
-                }
+                },
+                credentials: 'include'
             })
             .then((response) => {
                 if (!response.ok) {
@@ -85,7 +88,8 @@ export default class ExerciseClient {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
-                }
+                },
+                credentials: 'include'
             })
             .then((response) => {
                 if (!response.ok) {
@@ -102,7 +106,8 @@ export default class ExerciseClient {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
-                }
+                },
+                credentials: 'include'
             })
             .then((response) => {
                 if (!response.ok) {
@@ -120,7 +125,8 @@ export default class ExerciseClient {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
-                }
+                },
+                credentials: 'include'
             })
             .then((response) => {
                 if (!response.ok) {
@@ -138,7 +144,8 @@ export default class ExerciseClient {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
-                }
+                },
+                credentials: 'include'
             })
             .then((response) => {
                 if (!response.ok) {
@@ -148,9 +155,7 @@ export default class ExerciseClient {
             });
     }
 
-    static getUsername(): Promise<ExerciseDTO> {
-        let csrfToken = Cookies.get('XSRF-TOKEN');
-        if (csrfToken==undefined) csrfToken="";
+    static getUsername(): Promise<UserDTO> {
         return fetch("http://localhost:8081/api/auth/user.json", {
             mode:"cors",
             method: "GET",
@@ -160,7 +165,7 @@ export default class ExerciseClient {
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-                return response.json() as Promise<ExerciseDTO>
+                return response.json() as Promise<UserDTO>
             });
     }
 }

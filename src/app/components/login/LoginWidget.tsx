@@ -1,13 +1,14 @@
 import Cookies from "js-cookie";
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import ExerciseClient from "../../client/ExerciseClient";
 
 export default function LoginWidget() {
+    let [authOk,setAuthOk] = useState(false);
     function getResource() {
         return ExerciseClient.getUsername();
     }
 
-    function authenticate() {
+    function authenticate(username:string) {
         let request = "http://localhost:8081/login";
         let password = "Password"
         let csrfToken=  Cookies.get('XSRF-TOKEN');
@@ -18,7 +19,7 @@ export default function LoginWidget() {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             credentials: 'include',
-            body: "username=Enrico&password="+password
+            body: "username="+username+"&password="+password
         }).then(
             response => {
                 return response.json();
@@ -40,20 +41,26 @@ export default function LoginWidget() {
         getResource().then(
             body => {
                 console.log(body)
+                setAuthOk(true);
             }
         ).catch(
             e => {
-                authenticate()
+                setAuthOk(false);
+                authenticate("Enrico");
             });
     }, [])
 
+    let auth = <p>Not logged</p>
+    if (authOk){
+         auth = <p>Logged</p>
+    }
     return (
         <div>
             <header>
                 <h1>Header</h1>
+                {auth}
             </header>
             <main>
-
             </main>
         </div>
     );

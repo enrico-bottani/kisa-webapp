@@ -14,9 +14,11 @@ import ExercisesSelectorWidget from "./app/components/exercise/ExercisesSelector
 import Editor_ExerciseWidget from "./app/components/editor/Editor_ExerciseWidget";
 import Cookies from 'js-cookie';
 import LoginWidget from "./app/components/login/LoginWidget";
+import Navigation from "./app/components/Navigation";
 
 ReactDOM.render(
     <React.StrictMode>
+        <Navigation></Navigation>
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<App/>}>
