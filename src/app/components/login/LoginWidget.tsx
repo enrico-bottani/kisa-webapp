@@ -4,13 +4,11 @@ import ExerciseClient from "../../client/ExerciseClient";
 
 export default function LoginWidget() {
     let [authOk,setAuthOk] = useState(false);
-    function getResource() {
-        return ExerciseClient.getUsername();
-    }
+    let [username,setUsername] = useState("");
+    let [password,setPassword] = useState("");
 
-    function authenticate(username:string) {
+    function authenticate(username:string, password:string) {
         let request = "http://localhost:8081/login";
-        let password = "Password"
         let csrfToken=  Cookies.get('XSRF-TOKEN');
         if (csrfToken==undefined) csrfToken="";
         fetch(request, {
@@ -38,27 +36,27 @@ export default function LoginWidget() {
 
     useEffect(() => {
         //authenticate();
-        getResource().then(
+        ExerciseClient.getUsername().then(
             body => {
-                console.log(body)
                 setAuthOk(true);
             }
         ).catch(
             e => {
                 setAuthOk(false);
-                authenticate("Enrico");
             });
     }, [])
 
-    let auth = <p>Not logged</p>
-    if (authOk){
-         auth = <p>Logged</p>
+    function login() {
+        authenticate(username,password);
     }
+
     return (
         <div>
             <header>
                 <h1>Header</h1>
-                {auth}
+                <input onChange={(e)=>setUsername(e.target.value)}/>
+                <input onChange={(e)=>setPassword(e.target.value)}/>
+                <button onClick={login}>Login</button>
             </header>
             <main>
             </main>
