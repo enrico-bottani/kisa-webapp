@@ -4,6 +4,7 @@ import {useState} from "react";
 import ExerciseClient from "../../client/ExerciseClient";
 
 export default function Editor_MRCAnswerableItem_Widget(props: {
+    radioGroupId:number,
     answerableItem: MRCAnswerableItem,
     fetchExercise: () => void,
     onCheckChange: (id: number, state: number) => void
@@ -44,7 +45,7 @@ export default function Editor_MRCAnswerableItem_Widget(props: {
                     <input className="form-check-input mt-0"
                            onChange={()=>props.onCheckChange(props.answerableItem.id,1)}
                            checked={props.answerableItem.solution === 1} type="radio"
-                           name="radio-x"
+                           name={"radio-"+props.radioGroupId}
                            aria-label="Radio button for following text input"/>
                 </div>
                 {/* Text field */}
