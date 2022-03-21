@@ -10,23 +10,22 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import '@popperjs/core';
 import 'bootstrap/dist/js/bootstrap.min.js'
 import {BrowserRouter, Route, Routes, useParams} from "react-router-dom";
-import ExercisesSelectorWidget from "./app/components/exercise/ExercisesSelectorWidget";
-import Editor_ExerciseWidget from "./app/components/editor/Editor_ExerciseWidget";
+import ExercisesSelectorWidget from "./app/components/exercise_selection/ExercisesSelectorWidget";
+import ExerciseWidget from "./app/components/exercise/ExerciseWidget";
 import Cookies from 'js-cookie';
 import LoginWidget from "./app/components/login/LoginWidget";
 import Navigation from "./app/components/Navigation";
 
 ReactDOM.render(
     <React.StrictMode>
-        <Navigation></Navigation>
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<App/>}>
                     <Route path="login" element={<LoginWidget/>}/>
                     <Route path="edit/exercises" element={<ExercisesSelectorWidget  editMode={true}/>}/>
-                    <Route path="edit/exercises/:exercise" element={<Editor_ExerciseWidget editMode={true}/>} />
+                    <Route path="edit/exercises/:exercise" element={<ExerciseWidget editMode={true}/>} />
                     <Route path="exercises" element={<ExercisesSelectorWidget  editMode={false}/>}/>
-                    <Route path="exercises/:exercise" element={<Editor_ExerciseWidget editMode={false}/>} />
+                    <Route path="exercises/:exercise" element={<ExerciseWidget editMode={false}/>} />
                 </Route>
             </Routes>
         </BrowserRouter>

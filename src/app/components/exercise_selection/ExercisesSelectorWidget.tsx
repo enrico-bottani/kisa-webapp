@@ -31,7 +31,7 @@ export default function ExercisesSelectorWidget(props:{editMode?:boolean}) {
         case NetState.NET_STATE_OK: {
             element = (<>{exercises.map(exe => {
                     return (
-                        <div key={exe.id}><a href={exercisePath + exe.id}>{exe.id}&nbsp;{exe.title}</a></div>
+                        <div key={exe.id}><a href={exercisePath + exe.id}>{exe.title}</a></div>
                     )})}
                 </>
             )
@@ -42,7 +42,7 @@ export default function ExercisesSelectorWidget(props:{editMode?:boolean}) {
             break;
     }
 
-    return (<div>
+    return (<div className={"container"}>
         {element}
     </div>)
 }

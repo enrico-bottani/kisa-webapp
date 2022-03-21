@@ -33,7 +33,9 @@ export default function MRCEditorAnswerableWidget(props: {
     }
 
     let mrcAnswerableElement = props.mrcAnswerable.answerableItems.map(answerableItem => {
-        return (<Editor_MRCAnswerableItem_Widget fetchExercise={props.fetchExercise}
+        return (<Editor_MRCAnswerableItem_Widget
+            radioGroupId={props.mrcAnswerable.id}
+            fetchExercise={props.fetchExercise}
                                                  answerableItem={answerableItem}
                                                  onCheckChange={onCheckChange}
                                                  key={answerableItem.id}/>)

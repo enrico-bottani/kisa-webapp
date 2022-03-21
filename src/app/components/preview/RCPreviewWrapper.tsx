@@ -9,14 +9,15 @@ import STRConstant from "../../model/assignable/STRConstant";
 
 interface Props {
     rcSentenceDTO: MRCSentenceDTO;
-    editMode?:boolean;
+    editMode?: boolean;
 }
 
-function RCEditorPreviewWrapper(props: Props) {
+function RCPreviewWrapper(props: Props) {
     var singleChoiceSentence = props.rcSentenceDTO;
     let gapKeyCounter = 0;
+    let editMode = props.editMode === true ? 1 : 0;
 
-    let editMode = props.editMode===true?1:0;
+
 
     let children = singleChoiceSentence.assignables.map((a, id) => {
         switch (a.type) {
@@ -50,4 +51,4 @@ function RCEditorPreviewWrapper(props: Props) {
     )
 }
 
-export default RCEditorPreviewWrapper;
+export default RCPreviewWrapper;

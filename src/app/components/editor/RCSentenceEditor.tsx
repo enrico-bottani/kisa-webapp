@@ -2,7 +2,7 @@ import styles from './RCSentenceEditor.module.css'
 import {MRCSentence} from "../../model/epage/MRCSentence";
 import {MRCSentenceDTO} from "../../dto/epage/MRCSentenceDTO";
 import EditorStep from "./utils/EditorStep";
-import RCEditorPreviewWrapper from "../preview/RCEditorPreviewWrapper";
+import RCPreviewWrapper from "../preview/RCPreviewWrapper";
 import {stringify} from "querystring";
 import RCSentenceComponentStratEditor from "./RCSentenceComponentStratEditor";
 import MRCAnswerable from "../../model/assignable/MRCAnswerable";
@@ -58,7 +58,7 @@ function RCSentenceEditor(props: Props) {
                         <div className="col">
                             <EditorStep number={0} title="Preview:"
                                         paddingTop={marginTop} paddingBottom={marginTop} positionSticky={true}>
-                                <RCEditorPreviewWrapper rcSentenceDTO={props.rcSentenceDTO}/>
+                                <RCPreviewWrapper rcSentenceDTO={props.rcSentenceDTO}/>
                             </EditorStep>
                         </div>
                     </div>
