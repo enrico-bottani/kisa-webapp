@@ -1,6 +1,6 @@
 import ExerciseClient from "../../../../client/ExerciseClient";
 import React, {useEffect, useState} from "react";
-import {Outlet, useParams} from "react-router-dom";
+import {Link, Outlet, useParams} from "react-router-dom";
 import {ExerciseDTO} from "../../../../dto/exercise/ExerciseDTO";
 import ReactMarkdown from 'react-markdown'
 import AppRoutes from "../../../../route/AppRoutes";
@@ -49,7 +49,8 @@ export default function ExerciseWidget() {
     let exercises = [<div key={0}/>];
     if (exercise.sentences !== undefined) {
         exercises = exercise.sentences.map(s =>
-            <button key={s.id} onClick={() => setSentence(s.id)}>{s.id}</button>)
+            <Link key={s.id} to={`/exercise/${exerciseId}/sentence/${s.id}`}>{s.id}</Link>
+        )
     }
 
 
@@ -69,6 +70,6 @@ export default function ExerciseWidget() {
             </div>
 
 
-            <SentenceWidget sentenceId={sentence}/>
+            <Outlet />
         </div>)
 }

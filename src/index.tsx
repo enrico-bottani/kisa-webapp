@@ -42,6 +42,7 @@ function RouterWidget() {
                        element={<AllSeries />}/>
                 <Route path={AppRoutes.SERIES_ID} element={<SeriesItemWidget/>}/>
                 <Route path={AppRoutes.EXERCISE_ID} element={<ExerciseWidget/>}>
+                    <Route path={AppRoutes.SENTENCE_ID} element={<SentenceWidget/>}/>
                 </Route>
             </Route>
         </Routes>

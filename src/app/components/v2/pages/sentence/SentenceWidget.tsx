@@ -20,23 +20,20 @@ function mergeSentenceElements(sentence: SentenceDTO): any[] {
     return mergedElements;
 }
 
-export default function SentenceWidget(props: { sentenceId: number }) {
+export default function SentenceWidget() {
 
 
     let [sentence, setSentence] = useState({strings: [], radios: []} as SentenceDTO);
     let [selectedAnswer, setSelectedAnswer] = useState(-1);
-
+    let {sentenceId} = useParams();
     //
     useEffect(() => {
-        ExerciseClient.getSentenceById(props.sentenceId + "").then((e) => {
+        ExerciseClient.getSentenceById(sentenceId + "").then((e) => {
             setSentence(e)
         })
-
-    }, [props.sentenceId]);
+    }, [sentenceId]);
 
     let updateSelectedAnswer = function (answer:number){
-
-        localStorage.setItem(props.sentenceId+"",answer+"");
         setSelectedAnswer(answer);
     }
 

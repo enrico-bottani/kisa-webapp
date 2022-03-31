@@ -5,6 +5,6 @@ export default class AppRoutes {
     static SERIES_ID = this.SERIES + "/:seriesId";
     static EXERCISE = "/exercise";
     static EXERCISE_ID = "/exercise" + "/:exerciseId/";
-    static SENTENCE = "/sentence/";
+    static SENTENCE = "sentence/";
     static SENTENCE_ID = AppRoutes.SENTENCE+":sentenceId";
 }
