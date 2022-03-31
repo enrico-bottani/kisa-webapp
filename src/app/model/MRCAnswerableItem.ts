@@ -1,6 +1,3 @@
-import {Assignable} from "./assignable/Assignable";
-import {MRCAnswerableDTO} from "../dto/assignable/MRCAnswerableDTO";
-import MRCAnswerable from "./assignable/MRCAnswerable";
 import MRCAnswerableItemDTO from "../dto/item/MRCAnswerableItemDTO";
 
 export default class MRCAnswerableItem implements MRCAnswerableItemDTO {

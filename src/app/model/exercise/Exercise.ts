@@ -35,22 +35,22 @@ export class Exercise implements ExerciseDTO {
     id: number = -1;
     title: string = "";
     selected: number = 0;
-    pages: ExercisePage[] = [];
+    sentences: ExercisePage[] = [];
 
     constructor(id: number, title: string, selected: number, todos: ExercisePage[]) {
         this.id = id;
         this.title = title;
         this.selected = selected;
-        this.pages = todos;
+        this.sentences = todos;
     }
 
     clone(): Exercise {
-        return new Exercise(this.id, this.title, this.selected, this.pages);
+        return new Exercise(this.id, this.title, this.selected, this.sentences);
 
     }
 
     public setPages(pages: ExercisePage[]):Exercise{
-        this.pages = pages;
+        this.sentences = pages;
         return this;
     }
 

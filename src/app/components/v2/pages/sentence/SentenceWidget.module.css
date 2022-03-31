@@ -1,0 +1,12 @@
+.SentenceWrapper{
+    text-align: center;
+    font-size: 4rem;
+    color: white;
+    background-color: orange;
+}
+.RightAnswer{
+    background-color: #003300;
+}
+.WrongAnswer{
+    background-color: #870000;
+}

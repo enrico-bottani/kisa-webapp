@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
@@ -10,25 +10,47 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import '@popperjs/core';
 import 'bootstrap/dist/js/bootstrap.min.js'
 import {BrowserRouter, Route, Routes, useParams} from "react-router-dom";
-import ExercisesSelectorWidget from "./app/components/exercise_selection/ExercisesSelectorWidget";
-import ExerciseWidget from "./app/components/exercise/ExerciseWidget";
-import Cookies from 'js-cookie';
-import LoginWidget from "./app/components/login/LoginWidget";
-import Navigation from "./app/components/Navigation";
+
+import AppRoutes from "./app/route/AppRoutes";
+import AuthClient from "./app/client/AuthClient";
+import ProfileWidget from "./app/components/v2/pages/profile/ProfileWidget";
+import LoginWidget from "./app/components/v2/pages/profile/LoginWidget";
+import AllSeries from "./app/components/v2/pages/series/AllSeries";
+import SeriesItemWidget from "./app/components/v2/pages/series/SeriesItemWidget";
+import ExerciseWidget from "./app/components/v2/pages/exercise/ExerciseWidget";
+import SentenceWidget from "./app/components/v2/pages/sentence/SentenceWidget";
+
+
+function RouterWidget() {
+    let [userName, setUserName] = useState("");
+    useEffect(() => {
+        AuthClient.getUsername().then(body => {
+            setUserName(body.userName);
+        }).catch(() => {
+            console.log("unauthenticated")
+        })
+    }, [])
+    return (<BrowserRouter>
+        <Routes>
+            <Route path="/" element={<App userName={userName}/>}>
+                <Route path={AppRoutes.PROFILE_ROUTE}
+                       element={<ProfileWidget/>}/>
+
+                <Route path={AppRoutes.LOGIN_ROUTE}
+                       element={<LoginWidget userName={userName}/>}/>
+                <Route path={AppRoutes.SERIES}
+                       element={<AllSeries />}/>
+                <Route path={AppRoutes.SERIES_ID} element={<SeriesItemWidget/>}/>
+                <Route path={AppRoutes.EXERCISE_ID} element={<ExerciseWidget/>}>
+                </Route>
+            </Route>
+        </Routes>
+    </BrowserRouter>);
+}
 
 ReactDOM.render(
     <React.StrictMode>
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<App/>}>
-                    <Route path="login" element={<LoginWidget/>}/>
-                    <Route path="edit/exercises" element={<ExercisesSelectorWidget  editMode={true}/>}/>
-                    <Route path="edit/exercises/:exercise" element={<ExerciseWidget editMode={true}/>} />
-                    <Route path="exercises" element={<ExercisesSelectorWidget  editMode={false}/>}/>
-                    <Route path="exercises/:exercise" element={<ExerciseWidget editMode={false}/>} />
-                </Route>
-            </Routes>
-        </BrowserRouter>
+        <RouterWidget/>
     </React.StrictMode>,
     document.getElementById('root')
 );
