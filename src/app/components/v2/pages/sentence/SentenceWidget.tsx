@@ -2,56 +2,60 @@ import styles from "./SentenceWidget.module.css"
 import ExerciseClient from "../../../../client/ExerciseClient";
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import internal from "stream";
 import SentenceDTO from "../../../../dto/SentenceDTO";
 import RadioGroupWidget from "./RadioGroupWidget";
+import any = jasmine.any;
 
 
-function mergeSentenceElements(sentence: SentenceDTO): any[] {
-    let mergedElements = [];
+function mergeSentenceElements(sentence: SentenceDTO, mergedElements: any[]): number {
+    let numberOfChoices = 0;
     for (let i = 0; i < sentence.strings.length; i++) {
         mergedElements.push(sentence.strings[i]);
         if (i + 1 < sentence.strings.length) {
             if (i < sentence.radios.length) {
                 mergedElements.push(sentence.radios[i]);
+                numberOfChoices++;
             }
         }
     }
-    return mergedElements;
+    return numberOfChoices;
 }
 
-export default function SentenceWidget() {
+export default function SentenceWidget(props: { sentenceId: number }) {
 
 
     let [sentence, setSentence] = useState({strings: [], radios: []} as SentenceDTO);
     let [selectedAnswer, setSelectedAnswer] = useState(-1);
-    let {sentenceId} = useParams();
     //
     useEffect(() => {
-        ExerciseClient.getSentenceById(sentenceId + "").then((e) => {
+        ExerciseClient.getSentenceById(props.sentenceId + "").then((e) => {
             setSentence(e)
+            setSelectedAnswer((s) => -1);
         })
-    }, [sentenceId]);
+    }, [props.sentenceId]);
 
-    let updateSelectedAnswer = function (answer:number){
+    let updateSelectedAnswer = function (answer: number) {
         setSelectedAnswer(answer);
     }
 
-    let mergedElements = mergeSentenceElements(sentence);
+    let mergedElements = [] as any[];
+    let numberOfChoices = mergeSentenceElements(sentence, mergedElements);
 
     let result = [<span key={"0"}/>];
     mergedElements.map(item => {
         if (typeof item == "string") {
-            result.push(<div>{item}</div>)
+            result.push(<p>{item}</p>)
         } else {
-            let radioGroup = <RadioGroupWidget radioGroup={item} setSelected={updateSelectedAnswer}/>
+            let radioGroup = <RadioGroupWidget selected={selectedAnswer} radioGroup={item}
+                                               setSelected={updateSelectedAnswer}/>
             result.push(radioGroup)
         }
     })
 
+
+
     return (
-        <div>
-            <div>{result}</div>
-            {selectedAnswer}
+        <div className={styles.SentenceBackground}>
+            <div style={{textAlign: "center"}}>{result}</div>
         </div>)
 }

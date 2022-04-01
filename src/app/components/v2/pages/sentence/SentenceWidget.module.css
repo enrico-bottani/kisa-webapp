@@ -1,12 +1,25 @@
-.SentenceWrapper{
+.SentenceWrapper {
     text-align: center;
     font-size: 4rem;
     color: white;
     background-color: orange;
 }
-.RightAnswer{
+
+.SentenceBackground {
+    background-color: orange;
+    color: white;
+    font-size: 1.4rem;
+    padding: 1rem;
+}
+
+.SentenceBackground p {
+    margin-bottom: 0;
+}
+
+.RightAnswer {
     background-color: #003300;
 }
-.WrongAnswer{
+
+.WrongAnswer {
     background-color: #870000;
 }

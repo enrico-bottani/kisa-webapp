@@ -8,7 +8,7 @@ import SentenceWidget from "../sentence/SentenceWidget";
 
 interface ExerciseAnswerSheet {
     exerciseID: number;
-    solutionsGiven: Map<number,number>;
+    solutionsGiven: Map<number, number>;
 }
 
 
@@ -17,7 +17,7 @@ export default function ExerciseWidget() {
     let [exercise, setExercise] = useState({title: "[Title]"} as ExerciseDTO);
 
     let [editable, setEditable] = useState(false)
-    let [sentence, setSentence] = useState(0);
+    let [sentence, setSentence] = useState(5);
     let [answerSheet, setAnswerSheet] = useState({} as ExerciseAnswerSheet);
 
     useEffect(() => {
@@ -38,8 +38,8 @@ export default function ExerciseWidget() {
         }
     }, [])
 
-    function setAnswerForSentence(sentenceId: number, solution:number){
-        setAnswerSheet(prevAnswerSheetState=>{
+    function setAnswerForSentence(sentenceId: number, solution: number) {
+        setAnswerSheet(prevAnswerSheetState => {
             prevAnswerSheetState.solutionsGiven.set(sentenceId, solution)
             return prevAnswerSheetState;
         })
@@ -48,13 +48,13 @@ export default function ExerciseWidget() {
 
     let exercises = [<div key={0}/>];
     if (exercise.sentences !== undefined) {
-        exercises = exercise.sentences.map(s =>
-            <Link key={s.id} to={`/exercise/${exerciseId}/sentence/${s.id}`}>{s.id}</Link>
+        exercises = exercise.sentences.map((s,i) =>
+            <button key={s.id} className={"btn btn-secondary m-2"} onClick={()=>setSentence(s.id)}>{i}</button>
         )
     }
 
 
-    return (
+    return (<>
         <div className={"container"}>
             <div className="row pt-4">
                 <div className="col-12 ">
@@ -68,8 +68,7 @@ export default function ExerciseWidget() {
                     <span>{exercises}</span>
                 </div>
             </div>
-
-
-            <Outlet />
-        </div>)
+        </div>
+        <SentenceWidget sentenceId={sentence}/>
+    </>)
 }
