@@ -1,9 +1,7 @@
 .GroupRadius{
-    margin: 0.5rem;
-
+    border-radius: 0;
 }
 .GroupRadiusButton{
+    border-radius: 0;
     font-size: 1.4rem;
-    border-color: white;
-    color: white;
 }

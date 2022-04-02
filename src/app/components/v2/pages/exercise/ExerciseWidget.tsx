@@ -49,7 +49,7 @@ export default function ExerciseWidget() {
     let exercises = [<div key={0}/>];
     if (exercise.sentences !== undefined) {
         exercises = exercise.sentences.map((s,i) =>
-            <button key={s.id} className={"btn btn-secondary m-2"} onClick={()=>setSentence(s.id)}>{i}</button>
+            <button key={s.id} className={"btn btn-secondary me-2 rounded-0"} onClick={()=>setSentence(s.id)}>{i}</button>
         )
     }
 
@@ -64,7 +64,7 @@ export default function ExerciseWidget() {
                 <div className="col-12 ">
                     <h2>Sentences</h2>
                 </div>
-                <div className="row">
+                <div className="col-12 mb-2">
                     <span>{exercises}</span>
                 </div>
             </div>
